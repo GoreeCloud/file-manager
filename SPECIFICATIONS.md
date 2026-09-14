@@ -199,7 +199,7 @@ Current shared code establishes separate typed state/evidence fields so one posi
 
 ### Glaze UI
 
-Current required Stable baseline: **GLAZE UI V1.3 / 1.3.0**. Application-specific source mapping, automated checks, rendered/native accessibility, responsive/form-factor acceptance, and representative-platform evidence are required before File Manager can claim current-Stable alignment. The Android UI implementation predates this target and therefore requires explicit migration and fresh consumer acceptance. The Linux development harness is not a Glaze UI desktop implementation.
+Current required Stable baseline: **GLAZE UI V1.4 / 1.4.0**. Application-specific source mapping, automated checks, rendered/native accessibility, responsive/form-factor acceptance, and representative-platform evidence are required before File Manager can claim current-Stable alignment. The current Android Development source mapping targets V1.4, but source adoption does not establish rendered/native accessibility, representative-device, human optical, performance, release, or production acceptance. The Linux development harness is not a Glaze UI desktop implementation.
 
 ### Wardveil Security
 
@@ -263,4 +263,4 @@ Repository documentation includes README, specifications, features, feature road
 
 Source/build acceptance requires the exact revision to pass repository validation and all applicable platform-specific validation for the source present in that revision.
 
-Even successful Android and Linux development workflows do not establish production acceptance, complete storage-provider acceptance, user-facing copy/move/Trash/recovery acceptance, recursive transfer acceptance, current GLAZE UI V1.3 consumer acceptance, Wardveil/Privacy Shield/Everkeep runtime acceptance, Identity/Mesh production integration, Linux desktop UI/location-navigation/mount-lifecycle/package acceptance, production signing/deployment, or Stable qualification.
+Even successful Android and Linux development workflows do not establish production acceptance, complete storage-provider acceptance, user-facing copy/move/Trash/recovery acceptance, recursive transfer acceptance, current GLAZE UI V1.4 consumer acceptance, Wardveil/Privacy Shield/Everkeep runtime acceptance, Identity/Mesh production integration, Linux desktop UI/location-navigation/mount-lifecycle/package acceptance, production signing/deployment, or Stable qualification.
