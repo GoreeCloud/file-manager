@@ -4,7 +4,9 @@ import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-PLATFORM_CONTRACT_REVISION = "235e519fe342d7e7075c8239fbf0f3a19dc4c6c8"
+PLATFORM_CONTRACT_REVISION = "96701cc5f20c8e0deaad512d2a9f83e0411f3f18"
+GLAZE_STABLE_VERSION = "1.4.0"
+GLAZE_STABLE_REVISION = "84cb3db4884042f0fa25ed6d475a127fb110f596"
 
 required_root = [
     "README.md",
@@ -35,7 +37,9 @@ required_source = [
     "app/src/main/java/com/goreecloud/filemanager/storage/LocalFileRepository.kt",
     "app/src/main/java/com/goreecloud/filemanager/storage/SafTreeFileRepository.kt",
     "app/src/main/java/com/goreecloud/filemanager/ui/FileManagerApp.kt",
+    "app/src/main/java/com/goreecloud/filemanager/ui/GlazeFoundation.kt",
     "app/src/test/java/com/goreecloud/filemanager/storage/LocalFileRepositoryTest.kt",
+    "app/src/test/java/com/goreecloud/filemanager/ui/GlazeFileManagerContractTest.kt",
     "core/src/main/kotlin/com/goreecloud/filemanager/model/FileModels.kt",
     "core/src/main/kotlin/com/goreecloud/filemanager/platform/PlatformAuthorities.kt",
     "core/src/main/kotlin/com/goreecloud/filemanager/storage/FileStorageProvider.kt",
@@ -102,11 +106,11 @@ for required_text in [
 platform_workflow = (ROOT / ".github/workflows/platform-contract.yml").read_text(encoding="utf-8")
 required_platform_pin = "GoreeCloud/GoreeCloud/.github/workflows/reusable-platform-manifest.yml@" + PLATFORM_CONTRACT_REVISION
 if required_platform_pin not in platform_workflow:
-    errors.append("Platform Contract workflow must pin the accepted Glaze V1.3 central validator revision " + PLATFORM_CONTRACT_REVISION)
+    errors.append("Platform Contract workflow must pin the accepted Platform Contract 0.3 central validator revision " + PLATFORM_CONTRACT_REVISION)
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for required_text in [
-    "GLAZE UI V1.3 / 1.3.0",
+    "GLAZE UI V1.4 / `1.4.0`",
     "Linux and Android",
     "Wardveil Security",
     "Privacy Shield",
@@ -134,6 +138,7 @@ for required_text in [
     "FR-012",
     "Linux desktop location discovery",
     "discovery separate from explicit provider authorization",
+    "FR-027",
     "supported_platforms",
 ]:
     if required_text not in roadmap:
@@ -167,7 +172,7 @@ for required_text in ["Sync versus backup", "User-authorized Android document-tr
         errors.append(f"ARCHITECTURE.md missing required architecture invariant: {required_text!r}")
 
 specifications = (ROOT / "SPECIFICATIONS.md").read_text(encoding="utf-8")
-for required_text in ["Required native platforms", "Linux and Android", "Linux implementation status", "Cross-platform resource identity", "GLAZE UI V1.3 / 1.3.0", "Current Linux development storage baseline"]:
+for required_text in ["Required native platforms", "Linux and Android", "Linux implementation status", "Cross-platform resource identity", "Mandatory platform targets", "Current Linux development storage baseline"]:
     if required_text not in specifications:
         errors.append(f"SPECIFICATIONS.md missing required platform baseline: {required_text!r}")
 
@@ -235,14 +240,37 @@ for required_text in ["Adding an Android storage location", "Creating folders", 
         errors.append(f"USER-MANUAL.md missing current user behavior: {required_text!r}")
 
 conformance = (ROOT / "CONFORMANCE.md").read_text(encoding="utf-8")
-for required_text in ["bounded Linux-provider development", "goreecloud.platform.yaml", "Platform Contract workflow remains an independent required gate"]:
+for required_text in ["bounded Linux-provider development", "goreecloud.platform.yaml", "Platform Contract workflow remains an independent required gate", "GLAZE UI V1.4"]:
     if required_text.lower() not in conformance.lower():
         errors.append(f"CONFORMANCE.md missing current acceptance boundary: {required_text!r}")
 
 platform_contract = (ROOT / "goreecloud.platform.yaml").read_text(encoding="utf-8")
-for required_text in ['glaze_ui_required: "1.3.0"', 'glaze-ui==1.3.0', 'supported_platforms:\n  - android', 'Linux is a required first-class File Manager target']:
+for required_text in [
+    'schema_version: "0.3"',
+    f'glaze_ui_required: "{GLAZE_STABLE_VERSION}"',
+    f'glaze-ui=={GLAZE_STABLE_VERSION}',
+    'supported_platforms:\n  - android',
+    'Linux is a required first-class File Manager target',
+]:
     if required_text not in platform_contract:
         errors.append(f"goreecloud.platform.yaml missing current platform truth: {required_text!r}")
+
+glaze = (ROOT / "app/src/main/java/com/goreecloud/filemanager/ui/GlazeFoundation.kt").read_text(encoding="utf-8")
+for required_text in [
+    f'currentStableTarget = "{GLAZE_STABLE_VERSION}"',
+    f'stableSourceRevision = "{GLAZE_STABLE_REVISION}"',
+    'adoptionState = "ADOPTION_IN_PROGRESS"',
+    'MAX_ENVIRONMENTAL_COLOR_MEMORY_INFLUENCE = 0f',
+    'FILE_CONTENT_MAY_DRIVE_OPTICS = false',
+    'PLATFORM_AUTHORITY_STATE_MAY_DRIVE_OPTICS = false',
+    'REMOTE_CONTEXT_ALLOWED = false',
+    'TELEMETRY_REQUIRED = false',
+]:
+    if required_text not in glaze:
+        errors.append(f"GLAZE UI V1.4 source mapping missing fail-closed requirement: {required_text!r}")
+for forbidden_text in ["dynamicDarkColorScheme", "dynamicLightColorScheme", "Build.VERSION.SDK_INT", "Build.VERSION_CODES.S"]:
+    if forbidden_text in glaze:
+        errors.append(f"GLAZE UI V1.4 source mapping contains prohibited wallpaper/dynamic-color dependency: {forbidden_text!r}")
 
 if errors:
     for error in errors:
