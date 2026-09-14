@@ -97,16 +97,6 @@ platform_systems:
       - app/src/main/java/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
     notes: Provider-scoped file identity and Android URI authorization exist, but production GoreeCloud Identity account/session/device identity, ownership/access producer integration, and acceptance are not established. Linux platform Identity and access integration are also not yet implemented.
 
-  sync:
-    result: applicable-blocked
-    version: null
-    evidence:
-      - README.md
-      - ARCHITECTURE.md
-      - FEATURE-ROADMAP.md
-      - app/src/main/java/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
-    notes: GoreeCloud Sync remains a separately governed synchronization capability even though Platform Contract 0.3 requires an explicit declaration. Existing provider copies, transfer verification, backup/recovery state, and future Drive integration do not establish accepted Sync change tracking, conflict/version coordination, authorized replication, offline resume, or cross-device runtime acceptance.
-
 health:
   health_endpoint: null
   readiness_endpoint: null
