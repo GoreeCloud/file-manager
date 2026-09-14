@@ -58,7 +58,7 @@ require_text(
     "linux-desktop/src/main/kotlin/com/goreecloud/filemanager/linux/LinuxDesktopDevelopmentMain.kt",
     [
         "Non-production Linux desktop development surface",
-        "Linux Development · GLAZE UI V1.3 target · conformance pending",
+        "Linux Development · GLAZE UI V1.4 migration target · conformance pending",
         "Discovery is not authorization",
         "controller.openHighlightedCandidate()",
         "Read-only desktop browsing",
@@ -101,7 +101,7 @@ require_text(
         "Compose Multiplatform Desktop `1.12.0`",
         "gradle :linux-desktop:runDevelopment",
         "only the explicit **Open location** action",
-        "Current-Stable conformance is not claimed",
+        "current-Stable conformance is not claimed",
     ],
 )
 require_text(
@@ -126,7 +126,7 @@ require_text(
     "FEATURE-ROADMAP.md",
     [
         "FR-013",
-        "Native Linux desktop Glaze UI V1.3 surface",
+        "Native Linux desktop Glaze UI V1.4 surface",
         "supported_platforms",
     ],
 )
