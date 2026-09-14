@@ -2,7 +2,7 @@
 
 GoreeCloud File Manager is the original GoreeCloud-owned file-management application for browsing and controlling files across supported local, cloud, synchronized, removable, network, backup, and continuity contexts.
 
-> **Development status:** native Android application in active development, with a shared JVM File Manager core plus bounded Linux provider/discovery foundations and a development-only Compose Desktop browsing surface now present on the current candidate branch. This repository is **not Stable or production accepted**. Linux and Android are required first-class native product targets. Android remains the only production-shaped native user-facing development client; the Linux desktop surface is an engineering candidate, not a supported Linux package, production runtime, or Stable acceptance.
+> **Development status:** native Android application in active development, with a shared JVM File Manager core plus bounded Linux provider/discovery foundations and a development-only Compose Desktop browsing surface integrated on authoritative main. This repository is **not Stable or production accepted**. Linux and Android are required first-class native product targets. Android remains the only declared supported platform; the Linux desktop surface is a Development foundation, not a supported Linux package, production runtime, or Stable acceptance. The active V1.4/Platform Contract 0.3 candidate is based on current main and also carries forward the still-unmerged transfer-verification hardening from Draft PR #15.
 
 ## Required native platforms
 
@@ -26,7 +26,8 @@ The repository currently provides:
 - browsing of app-private storage and user-selected Android document trees without requesting unrestricted filesystem access;
 - provider-scoped resource identity and explicit per-item capabilities;
 - verified create-folder, rename, and delete operations for supported Android providers;
-- a provider-generic regular-file copy/move transfer service that streams source bytes, publishes through the destination provider, reopens the destination, and requires matching SHA-256 content before a move may remove its source;
+- a provider-generic regular-file copy/move transfer service that streams source bytes, publishes through the destination provider, reopens the exact destination resource, and requires matching SHA-256 content before a move may remove its source;
+- active transfer hardening that treats destination size metadata as an optional early consistency signal while still requiring exact-resource SHA-256 readback verification;
 - deliberate refusal of recursive folder deletion and recursive folder transfer in this development slice;
 - operation-result messaging and refresh-after-operation reconciliation;
 - Android Home and Browse surfaces with compact/adaptive navigation behavior;
@@ -41,11 +42,12 @@ The repository currently provides:
 - a development-only Compose Multiplatform Desktop `1.12.0` presentation surface with an edge location sidebar, responsive toolbar, solid file-content plane, contextual inspector, and read-only provider-scoped folder browsing;
 - a Linux desktop controller that structurally separates discovery/highlighting from provider construction: only the explicit **Open location** action may create the bounded provider, and returning to Locations closes that provider boundary;
 - unit tests proving the desktop discovery/highlight path is non-authorizing, explicit open constructs the provider, navigation stays provider-scoped, failed open leaves no provider authorized, and returning to Locations clears the active provider;
+- a bounded Android GLAZE UI V1.4 / `1.4.0` source mapping on the active migration candidate, pinned to Stable source revision `84cb3db4884042f0fa25ed6d475a127fb110f596`, with file/content/provider/authority state prohibited from driving optical adaptation;
 - repository validation plus independent Android and Linux development workflow definitions; exact-head workflow results remain the acceptance evidence for each candidate revision;
 - a repository `FEATURE-ROADMAP.md` synchronized with the central GoreeCloud File Manager feature-roadmap control;
 - a repository `USER-MANUAL.md` synchronized with the central GoreeCloud User Manual requirement.
 
-The current storage slice remains intentionally bounded. The Android backend has regular-file copy/move primitives, but the Android UI does not yet expose destination-selection copy/move workflows. The Linux desktop candidate exposes location selection and read-only folder browsing only; existing Linux mutation primitives are deliberately not surfaced there. Duplicate, user-facing file creation on Android, multi-selection, unified Trash/recovery, recursive folder transfer, removable-storage lifecycle/safe-eject controls, network-provider workflows, GoreeCloud Drive, cross-device state, search/indexing, previews, sharing, and accepted platform-service runtime integrations remain implementation work.
+The current storage slice remains intentionally bounded. The Android backend has regular-file copy/move primitives, but the Android UI does not yet expose destination-selection copy/move workflows. The Linux desktop Development surface exposes location selection and read-only folder browsing only; existing Linux mutation primitives are deliberately not surfaced there. Duplicate, user-facing file creation on Android, multi-selection, unified Trash/recovery, recursive folder transfer, removable-storage lifecycle/safe-eject controls, network-provider workflows, GoreeCloud Drive, cross-device state, search/indexing, previews, sharing, and accepted platform-service runtime integrations remain implementation work.
 
 ## Linux development boundary
 
@@ -68,9 +70,9 @@ Every discovery result carries an explicit-selection requirement. Discovery does
 
 ### Linux desktop development surface
 
-The current candidate adds a non-production Compose Desktop surface rather than relabeling the CLI harness as a desktop application. It presents discovered location candidates first. Highlighting a candidate remains metadata-only; the separate **Open location** action is required before `LinuxFileRepository` is constructed. The resulting desktop browsing session is read-only at the UI layer even when the provider reports mutation capabilities.
+Authoritative main contains a non-production Compose Desktop surface rather than relabeling the CLI harness as a desktop application. It presents discovered location candidates first. Highlighting a candidate remains metadata-only; the separate **Open location** action is required before `LinuxFileRepository` is constructed. The resulting desktop browsing session is read-only at the UI layer even when the provider reports mutation capabilities.
 
-The desktop composition follows the current GLAZE UI V1.3 direction at source/design level: content-first window composition, edge-integrated location navigation, responsive toolbar, solid file-content plane, contextual information, clear state/error messaging, and deliberate avoidance of a stretched mobile layout. This source implementation is **not** a Glaze conformance certificate. Rendered/native accessibility, keyboard/pointer, reduced-motion/transparency/contrast behavior, representative desktop review, and current consumer acceptance remain pending.
+The desktop composition is a Development surface that must migrate and qualify against current Stable **GLAZE UI V1.4 / `1.4.0`**. It already follows content-first window composition, edge-integrated location navigation, responsive toolbar, solid file-content plane, contextual information, clear state/error messaging, and deliberate avoidance of a stretched mobile layout. This source implementation is **not** a Glaze conformance certificate. Rendered/native accessibility, keyboard/pointer, reduced-motion/transparency/contrast behavior, representative desktop review, and current consumer acceptance remain pending.
 
 Run the development surface from a Linux graphical session with:
 
@@ -96,6 +98,14 @@ A selected tree is treated as an Android document provider, not blindly labeled 
 
 Mutation actions are capability-driven. File Manager exposes create-folder, rename, or delete only when both authorization and the backing provider report support. Recursive folder deletion is intentionally rejected until unified Trash, backup/recovery, Everkeep, and destructive-operation safeguards are implemented and accepted. Copy/move remains service-level foundation only until destination selection, user-facing conflict handling, operation UX, and the applicable destructive/recovery safeguards are connected to the UI.
 
+## GLAZE UI V1.4 development mapping
+
+The active Android migration candidate replaces wallpaper-derived dynamic Material color selection with a bounded neutral light/dark mapping tied to current Stable GLAZE UI V1.4 / `1.4.0` source authority. It defines 48 dp ordinary and 56 dp Touch Assistance reference floors and keeps environmental color-memory influence at `0%` for the bounded source mapping.
+
+File names, file contents, provider identity, file-operation state, Privacy Shield/Wardveil/Everkeep/Identity/Mesh/Manager/Sync state, remote context, and telemetry may not drive File Manager optical adaptation. Reduced Transparency and forced-color source behavior fail closed to a solid-accessible optical state. Optical Engine, Reduced Transparency, Increased Contrast, representative Android/Linux, and human-visual acceptance remain false until independent evidence exists.
+
+This source mapping is an adoption step, not a claim that the application has passed rendered, accessibility, adaptive/form-factor, physical-device, performance, rollback, V1.4.1 human/manual/device, release, or Stable acceptance.
+
 ## Product direction
 
 The target product is a unified file control center spanning traditional file management, search, previews, tags and collections, operations, storage intelligence, offline availability, sharing, synchronization, backup/recovery, Everkeep continuity, Privacy Shield privacy state, Wardveil security state, GoreeCloud Identity ownership/access state, and GoreeCloud Mesh coordination across Linux and Android.
@@ -104,6 +114,8 @@ Two non-negotiable product rules are already encoded in the architecture:
 
 - **Sync is not backup.** A synchronized copy or synchronized deletion must never be represented as independent recovery protection.
 - **Missing evidence is not reassurance.** Unknown, stale, unavailable, or unverified platform evidence must remain visible as such.
+
+GoreeCloud Sync is declared explicitly by Platform Contract `0.3`, but File Manager continues to treat synchronization as distinct from provider copies, ordinary transfer verification, backup/recovery, Everkeep continuity, and other platform authorities.
 
 ## Native application model
 
@@ -115,12 +127,12 @@ Compose Multiplatform Desktop `1.12.0` is the current Linux **development presen
 
 ## Mandatory GoreeCloud platform gates
 
-- **Glaze UI:** current governed target is **GLAZE UI V1.3 / 1.3.0 Stable**. The Linux candidate now has a real desktop presentation source surface, but it remains development-only and has not completed rendered/native accessibility, adaptive/input, reduced-transparency/contrast/motion, or representative-platform acceptance. Android also still requires fresh current-revision migration/acceptance. Current-Stable conformance is not claimed.
+- **Glaze UI:** current governed target is **GLAZE UI V1.4 / `1.4.0` Stable**. The active Android candidate now has a bounded V1.4 source mapping and fail-closed source tests, while the merged Linux desktop Development surface also requires V1.4 migration. Neither platform has completed rendered/native accessibility, adaptive/input, reduced-transparency/contrast/motion, representative-platform, human-visual, or production acceptance; current-Stable conformance is not claimed.
 - **Wardveil Security:** integration is required for authoritative security state and applicable file/content protection. No broad “Protected by Wardveil” claim is made by this repository.
 - **Privacy Shield:** integration is required for privacy authorization, minimization, exposure state, and privacy-aware file workflows. Runtime acceptance is not yet established here.
 - **Everkeep:** integration is required for evidence-backed backup, recoverability, continuity, preservation, and portability state. Backup existence must not be equated with verified recoverability.
 
-GoreeCloud Identity and GoreeCloud Mesh are also first-class platform authorities for identity/access and coordination respectively; their adapter boundaries are established, but runtime integration remains pending.
+GoreeCloud Manager, GoreeCloud Identity, and GoreeCloud Mesh remain independent platform authorities whose runtime acceptance is not established. Platform Contract `0.3` also requires GoreeCloud Sync to be declared explicitly; its runtime acceptance is independently blocked and must not be inferred from file transfer or backup state.
 
 ## Repository documents
 
@@ -143,7 +155,7 @@ The canonical project record and historical change log are maintained in Google 
 - Compile API: 37
 - Target API: 36
 - Java runtime target: 17
-- UI: Jetpack Compose / Material 3 with GoreeCloud Glaze UI application mapping
+- UI: Jetpack Compose / Material 3 with GoreeCloud GLAZE UI V1.4 application mapping in active Development adoption
 
 Run current Android validation with:
 
