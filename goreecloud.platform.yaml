@@ -1,4 +1,4 @@
-schema_version: "0.2"
+schema_version: "0.3"
 
 component:
   type: application
@@ -26,6 +26,7 @@ platform_systems:
       - README.md
       - app/src/main/java/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
     notes: File Manager has explicit platform-authority adapter boundaries, but accepted GoreeCloud Manager registration, administrative visibility, lifecycle control, and runtime acceptance are not established.
+
   privacy_shield:
     result: applicable-blocked
     version: null
@@ -35,7 +36,9 @@ platform_systems:
       - CONFORMANCE.md
       - app/src/main/java/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
       - app/src/main/java/com/goreecloud/filemanager/storage/SafTreeFileRepository.kt
-    notes: Current Android storage access is user-authorized through the Storage Access Framework and avoids unrestricted filesystem permission, and missing privacy evidence remains explicit rather than reassuring. Accepted Privacy Shield policy, privacy-state producer integration, minimization/retention authority, and runtime acceptance are not established. The Linux Development filesystem/provider surface likewise does not substitute for Privacy Shield authority.
+      - app/src/main/java/com/goreecloud/filemanager/ui/GlazeFoundation.kt
+    notes: Current Android storage access is user-authorized through the Storage Access Framework and avoids unrestricted filesystem permission. The V1.4 optical policy also forbids file names, file content, provider identity, operation state, and platform-authority state from becoming presentation-environment inputs. Accepted Privacy Shield policy, privacy-state producer integration, minimization/retention authority, and runtime acceptance are not established. The Linux Development filesystem/provider surface likewise does not substitute for Privacy Shield authority.
+
   wardveil_security:
     result: applicable-blocked
     version: null
@@ -45,7 +48,9 @@ platform_systems:
       - CONFORMANCE.md
       - app/src/main/java/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
       - app/src/main/java/com/goreecloud/filemanager/storage/FileTransferService.kt
-    notes: File Manager separates security evidence from ordinary file state and cross-provider transfer integrity uses SHA-256 verification, but authoritative Wardveil Security producer integration, applicable content scanning/protection, destructive-operation security policy, and runtime acceptance are not established.
+      - app/src/main/java/com/goreecloud/filemanager/ui/GlazeFoundation.kt
+    notes: File Manager separates security evidence from ordinary file state and cross-provider transfer integrity uses SHA-256 verification, but authoritative Wardveil Security producer integration, applicable content scanning/protection, destructive-operation security policy, and runtime acceptance are not established. Presentation cannot manufacture security state.
+
   everkeep:
     result: applicable-blocked
     version: null
@@ -55,17 +60,21 @@ platform_systems:
       - CONFORMANCE.md
       - app/src/main/java/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
     notes: The domain model keeps synchronization, backup/recoverability, and continuity distinct and recursive folder deletion remains refused while recovery safeguards are incomplete. Accepted Everkeep backup/recovery evidence, Trash/recovery integration, clean-target restore, continuity, and portability acceptance are not established.
+
   glaze_ui:
     result: applicable-migration-required
-    version: null
+    version: "1.4.0"
     evidence:
       - README.md
       - ARCHITECTURE.md
       - CONFORMANCE.md
+      - FEATURE-ROADMAP.md
       - app/src/main/java/com/goreecloud/filemanager/ui/GlazeFoundation.kt
       - app/src/main/java/com/goreecloud/filemanager/ui/FileManagerApp.kt
+      - app/src/test/java/com/goreecloud/filemanager/ui/GlazeFileManagerContractTest.kt
       - linux-desktop/src/main/kotlin/com/goreecloud/filemanager/linux/LinuxDesktopDevelopmentMain.kt
-    notes: GLAZE UI V1.3 / 1.3.0 is the current governed Stable consumer target. The existing native Compose application has a repository-local Glaze mapping foundation that predates this target, and the Linux desktop surface is Development-only. File Manager must explicitly migrate and complete application-specific rendered, accessibility, resilience, adaptive/form-factor, representative-platform, and Human Visual Excellence acceptance independently for Android and Linux.
+    notes: The Android Development client targets current Stable GLAZE UI V1.4 / 1.4.0 at exact Stable revision 84cb3db4884042f0fa25ed6d475a127fb110f596 through a bounded native neutral theme and File Manager-specific optical policy. Android dynamic wallpaper-derived colors are no longer used by this source mapping. Optical Engine, Reduced Transparency, Increased Contrast, representative Android/Linux platform, accessibility, rendered, adaptive, performance, rollback, and Human Visual acceptance remain explicitly unaccepted. The Linux desktop surface remains Development-only and requires independent Glaze acceptance.
+
   mesh:
     result: applicable-blocked
     version: null
@@ -78,6 +87,7 @@ platform_systems:
     dependencies: []
     published_events: []
     consumed_events: []
+
   identity:
     result: applicable-blocked
     version: null
@@ -86,6 +96,16 @@ platform_systems:
       - ARCHITECTURE.md
       - app/src/main/java/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
     notes: Provider-scoped file identity and Android URI authorization exist, but production GoreeCloud Identity account/session/device identity, ownership/access producer integration, and acceptance are not established. Linux platform Identity and access integration are also not yet implemented.
+
+  sync:
+    result: applicable-blocked
+    version: null
+    evidence:
+      - README.md
+      - ARCHITECTURE.md
+      - FEATURE-ROADMAP.md
+      - app/src/main/java/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
+    notes: GoreeCloud Sync remains a separately governed synchronization capability even though Platform Contract 0.3 requires an explicit declaration. Existing provider copies, transfer verification, backup/recovery state, and future Drive integration do not establish accepted Sync change tracking, conflict/version coordination, authorized replication, offline resume, or cross-device runtime acceptance.
 
 health:
   health_endpoint: null
@@ -124,11 +144,11 @@ external_dependencies:
     version_constraint: ">=26"
 
 compatibility:
-  platform_contract: "0.2"
-  glaze_ui_required: "1.3.0"
+  platform_contract: "0.3"
+  glaze_ui_required: "1.4.0"
   requires:
-    - goreecloud-platform-contract==0.2
-    - glaze-ui==1.3.0
+    - goreecloud-platform-contract==0.3
+    - glaze-ui==1.4.0
     - android-api>=26
   provides: []
 
@@ -143,6 +163,7 @@ conformance:
     - README.md
     - ARCHITECTURE.md
     - CONFORMANCE.md
+    - FEATURE-ROADMAP.md
     - SPECIFICATIONS.md
     - app/src/main/AndroidManifest.xml
     - app/src/main/java/com/goreecloud/filemanager/model/FileModels.kt
@@ -153,16 +174,18 @@ conformance:
     - app/src/main/java/com/goreecloud/filemanager/storage/SafTreeFileRepository.kt
     - app/src/main/java/com/goreecloud/filemanager/ui/FileManagerApp.kt
     - app/src/main/java/com/goreecloud/filemanager/ui/GlazeFoundation.kt
+    - app/src/test/java/com/goreecloud/filemanager/ui/GlazeFileManagerContractTest.kt
     - linux-client/src/main/kotlin/com/goreecloud/filemanager/linux/LinuxFileRepository.kt
     - linux-client/src/main/kotlin/com/goreecloud/filemanager/linux/LinuxDesktopController.kt
     - linux-desktop/src/main/kotlin/com/goreecloud/filemanager/linux/LinuxDesktopDevelopmentMain.kt
   blockers:
-    - Linux is a required first-class File Manager target. Shared core, a bounded Linux filesystem provider/build-test foundation, read-only location discovery, and an unmerged native desktop Development surface now exist, but supported packaging, representative runtime/accessibility/input evidence, desktop-system integration, applicable platform-system acceptance, signing/release/rollback provenance, and explicit Linux lifecycle qualification are not established; supported_platforms therefore remains Android-only.
+    - Linux is a required first-class File Manager target. Shared core, a bounded Linux filesystem provider/build-test foundation, read-only location discovery, and a merged native desktop Development surface exist, but supported packaging, representative runtime/accessibility/input evidence, desktop-system integration, applicable platform-system acceptance, signing/release/rollback provenance, and explicit Linux lifecycle qualification are not established; supported_platforms therefore remains Android-only.
     - GoreeCloud Manager registration, administrative visibility, lifecycle integration, and acceptance are not established.
     - Privacy Shield producer integration and accepted privacy authorization/minimization/retention behavior are not established.
     - Wardveil Security producer integration and accepted file-security/destructive-operation policy are not established; SHA-256 transfer verification is integrity evidence only.
     - Everkeep integration, unified Trash/recovery, backup/recoverability evidence, clean-target restore, rollback, and continuity acceptance are not established.
-    - File Manager requires explicit migration to governed GLAZE UI V1.3 / 1.3.0 plus complete application-specific Linux and Android acceptance evidence.
+    - File Manager GLAZE UI V1.4 source adoption is in progress; complete rendered, accessibility, adaptive/form-factor, representative Android/Linux platform, performance, rollback, production, and applicable V1.4.1 human/manual/device acceptance remain outstanding.
     - GoreeCloud Mesh registration, capabilities/events, producer evidence, and runtime acceptance are not established.
     - GoreeCloud Identity production account/session/device/ownership integration and acceptance are not established.
+    - GoreeCloud Sync change tracking, version/conflict reconciliation, authorized replication, offline-resume, and cross-device runtime acceptance are not established.
     - Complete user-facing copy/move/duplicate/file creation, multi-selection, unified Trash, removable/network/Drive providers, previews, sharing, search/indexing, production signing, representative-platform acceptance, release approval, Release Candidate entry, and Stable qualification remain outstanding.
