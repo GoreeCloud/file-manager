@@ -4,7 +4,7 @@ import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-PLATFORM_CONTRACT_REVISION = "908701c6795ffcd608bd3d8a1e787395a04f1d62"
+PLATFORM_CONTRACT_REVISION = "96701cc5f20c8e0deaad512d2a9f83e0411f3f18"
 GLAZE_STABLE_VERSION = "1.4.0"
 GLAZE_STABLE_REVISION = "84cb3db4884042f0fa25ed6d475a127fb110f596"
 
@@ -251,7 +251,6 @@ for required_text in [
     f'glaze-ui=={GLAZE_STABLE_VERSION}',
     'supported_platforms:\n  - android',
     'Linux is a required first-class File Manager target',
-    '  sync:',
 ]:
     if required_text not in platform_contract:
         errors.append(f"goreecloud.platform.yaml missing current platform truth: {required_text!r}")
