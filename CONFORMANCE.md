@@ -21,12 +21,14 @@ The current development milestone therefore distinguishes four levels of truth:
 | Android storage authorization | Least-privilege, provider-bounded access | App-private confinement plus user-selected persisted document trees implemented | In progress |
 | Linux filesystem/provider integration | Native bounded Linux filesystem/provider behavior | Explicit-root provider, symlink/path/mount safeguards, read-only Home/XDG/mount candidate discovery, desktop explicit-open controller, tests, harness, and Linux workflow definition present; broader desktop/provider acceptance incomplete | In progress / blocked for production |
 | Core file operations | Safe, capability-aware, reconcilable operations | Bounded mutation + SHA-256-verified ordinary-file transfer foundation; Linux desktop candidate intentionally exposes browsing only; complete UI/Trash/recursive workflows incomplete | Blocked |
-| Glaze UI | GLAZE UI V1.3 / 1.3.0 Stable | Central Platform Contract baseline is V1.3; Linux now has a source-level desktop development surface, but rendered/native Glaze/accessibility/input acceptance is incomplete; Android current-revision acceptance is also incomplete | Blocked |
+| Glaze UI | GLAZE UI V1.6 / 1.6.0 Stable | Contract 0.4 requires V1.6. Android has a bounded V1.6 authority/presentation-policy mapping, while Linux presentation still carries earlier semantics; complete rendered/native Glaze/accessibility/input/performance acceptance is incomplete on both platforms | Blocked |
 | Wardveil Security | Current approved Wardveil contracts | Adapter boundary only; no accepted runtime evidence | Blocked |
 | Privacy Shield | Current approved Privacy Shield contract/runtime authority | Adapter boundary only; no accepted runtime evidence | Blocked |
 | Everkeep | Current approved continuity/recovery contract | Adapter boundary only; no accepted runtime evidence | Blocked |
 | GoreeCloud Identity | Current approved identity/access authority | Adapter boundary only | In progress |
 | GoreeCloud Mesh | Current approved coordination/evidence profile | Adapter boundary only | In progress |
+| GoreeCloud Policy | Current approved policy/evidence profile | Explicitly applicable-blocked; runtime evaluation, enforcement coordination, explanation, freshness, exception handling, and acceptance are not established | Blocked |
+| GoreeCloud Observability | Current approved observability/evidence profile | Explicitly applicable-blocked; runtime health, diagnostics, transfer/performance signals, dependency health, provenance/freshness, privacy-safe telemetry, monitoring, and acceptance are not established | Blocked |
 
 `goreecloud.platform.yaml` intentionally remains Android-only in `supported_platforms` until Linux satisfies the machine-readable supported-platform evidence requirements. Linux provider, discovery, or desktop-development source existing is not sufficient reason to broaden that field.
 
@@ -87,7 +89,7 @@ All discovery entries require explicit selection before File Manager constructs 
 - returning to Locations clears the active provider/current-location boundary;
 - the desktop UI exposes browsing/navigation only and does not surface the provider's mutation primitives in this milestone.
 
-The initial source composition provides an edge-integrated location sidebar, responsive toolbar, solid file-content plane, contextual inspector, and explicit status/error/boundary presentation. Those design choices follow the current GLAZE UI V1.3 desktop direction at source level, but source composition and successful compilation are not rendered/native conformance evidence.
+The initial source composition provides an edge-integrated location sidebar, responsive toolbar, solid file-content plane, contextual inspector, and explicit status/error/boundary presentation. Those design choices follow an earlier GLAZE UI V1.3 desktop direction at source level. Current Stable authority is V1.6, so source composition and successful compilation are neither current-version migration nor rendered/native conformance evidence.
 
 Exact-head Linux development CI is required to establish candidate-specific source/build/test evidence for these behaviors. That workflow checks repository contracts, shared-core/Linux tests including the desktop controller, Compose Desktop source compilation, JVM development-distribution construction, explicit-root smoke behavior, a distribution digest, and an explicit development-only artifact boundary.
 
@@ -107,11 +109,11 @@ A provider reporting a filesystem capability does not establish Privacy Shield a
 
 ## Glaze UI acceptance requirements
 
-File Manager may claim current-Stable Glaze UI alignment only after its exact revision demonstrates repository-local **GLAZE UI V1.3 / 1.3.0** adoption, automated validation, rendered/native accessibility, responsive/form-factor behavior, state presentation, and representative platform acceptance appropriate to each supported Linux and Android context.
+File Manager may claim current-Stable Glaze UI alignment only after its exact revision demonstrates repository-local **GLAZE UI V1.6 / 1.6.0** migration, automated validation, rendered/native accessibility, responsive/form-factor behavior, state presentation, performance, rollback readiness, and representative platform acceptance appropriate to each supported Linux and Android context.
 
-The current Android source's historical Glaze mapping foundation is not a conformance certificate and cannot be relabeled as V1.3 acceptance without fresh migration evidence. The Linux command-line development harness is not a desktop Glaze UI surface. The new Compose Desktop development source is a presentation implementation candidate, but compilation alone supplies no rendered/native accessibility, reduced-transparency/contrast/motion, keyboard/pointer, representative-desktop, or current-Stable conformance evidence.
+The Android source now contains a bounded V1.6 authority/presentation-policy mapping, but that mapping is not a conformance certificate and cannot be relabeled as complete V1.6 acceptance without the remaining optical/component, rendered, accessibility, representative-device, performance, rollback, and release evidence. The Linux command-line development harness is not a desktop Glaze UI surface. The new Compose Desktop development source is a presentation implementation candidate, but compilation alone supplies no rendered/native accessibility, reduced-transparency/contrast/motion, keyboard/pointer, representative-desktop, or current-Stable conformance evidence.
 
-The authoritative central Platform Contract has been reconciled to GLAZE UI V1.3 / `1.3.0` at merged immutable revision `235e519fe342d7e7075c8239fbf0f3a19dc4c6c8`. File Manager's reusable Platform Contract workflow is pinned to that exact revision. This resolves the stale shared-validator baseline mismatch; it does **not** establish File Manager's rendered/native Glaze UI acceptance, which remains independently blocked on application-specific migration and evidence.
+The authoritative central Platform Contract 0.4 is pinned at exact revision `e49b9afdea094c96a36a0457b1603f2fa8e8fa6b` and validates the nine-system model plus the current Stable GLAZE UI `1.6.0` requirement. The Stable V1.6 release source is `a7180679ea851389e0f3004515f9a25f420e716d`. File Manager's reusable Platform Contract workflow is pinned to the Contract 0.4 revision. Passing that manifest gate does **not** establish File Manager's rendered/native Glaze UI or platform-system runtime acceptance.
 
 ## Wardveil claim rules
 
@@ -152,6 +154,6 @@ Current Linux development workflow checks include:
 - distribution SHA-256 digest;
 - an evidence file stating that the artifact and desktop compilation are development evidence, not accepted Linux desktop/package/Stable proof.
 
-The shared Platform Contract workflow remains an independent required gate and is pinned to the accepted central V1.3 validator revision. A successful manifest/conformance run proves only the Platform Contract checks performed for that exact caller revision; it does not upgrade application-specific Glaze UI, security, privacy, recovery, Linux desktop, or Stable acceptance.
+The shared Platform Contract workflow remains an independent required gate and is pinned to the accepted central Contract 0.4 validator revision. A successful manifest/conformance run proves only the Platform Contract checks performed for that exact caller revision; it does not upgrade application-specific Glaze UI, security, privacy, recovery, Linux desktop, or Stable acceptance.
 
 Passing source/build checks establishes only the checks actually performed for that exact revision. It does not establish platform-runtime production acceptance, representative-platform compatibility, production signing/deployment, Linux desktop/package support, complete mount/removable-media lifecycle behavior, complete Platform-System integration, or Stable qualification.

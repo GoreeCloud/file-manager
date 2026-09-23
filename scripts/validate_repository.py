@@ -4,7 +4,7 @@ import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-PLATFORM_CONTRACT_REVISION = "235e519fe342d7e7075c8239fbf0f3a19dc4c6c8"
+PLATFORM_CONTRACT_REVISION = "e49b9afdea094c96a36a0457b1603f2fa8e8fa6b"
 
 required_root = [
     "README.md",
@@ -35,6 +35,10 @@ required_source = [
     "app/src/main/java/com/goreecloud/filemanager/storage/LocalFileRepository.kt",
     "app/src/main/java/com/goreecloud/filemanager/storage/SafTreeFileRepository.kt",
     "app/src/main/java/com/goreecloud/filemanager/ui/FileManagerApp.kt",
+    "app/src/main/java/com/goreecloud/filemanager/ui/GlazeFoundation.kt",
+    "app/src/main/java/com/goreecloud/filemanager/ui/GlazeV16PresentationPolicy.kt",
+    "app/src/test/java/com/goreecloud/filemanager/ui/GlazeFoundationPolicyTest.kt",
+    "app/src/test/java/com/goreecloud/filemanager/ui/GlazeFileManagerContractTest.kt",
     "app/src/test/java/com/goreecloud/filemanager/storage/LocalFileRepositoryTest.kt",
     "core/src/main/kotlin/com/goreecloud/filemanager/model/FileModels.kt",
     "core/src/main/kotlin/com/goreecloud/filemanager/platform/PlatformAuthorities.kt",
@@ -102,11 +106,35 @@ for required_text in [
 platform_workflow = (ROOT / ".github/workflows/platform-contract.yml").read_text(encoding="utf-8")
 required_platform_pin = "GoreeCloud/GoreeCloud/.github/workflows/reusable-platform-manifest.yml@" + PLATFORM_CONTRACT_REVISION
 if required_platform_pin not in platform_workflow:
-    errors.append("Platform Contract workflow must pin the accepted Glaze V1.3 central validator revision " + PLATFORM_CONTRACT_REVISION)
+    errors.append("Platform Contract workflow must pin the accepted Contract 0.4 central validator revision " + PLATFORM_CONTRACT_REVISION)
+
+glaze_foundation = (ROOT / "app/src/main/java/com/goreecloud/filemanager/ui/GlazeFoundation.kt").read_text(encoding="utf-8")
+for required_text in [
+    'const val currentStableTarget = GlazeV16PresentationPolicy.stableVersion',
+    'const val currentStableSourceRevision = GlazeV16PresentationPolicy.stableSourceRevision',
+    'GlazeV16PresentationPolicy.minimumTouchTargetDp(touchAssistance = false).dp',
+    'GlazeV16PresentationPolicy.minimumTouchTargetDp(touchAssistance = true).dp',
+]:
+    if required_text not in glaze_foundation:
+        errors.append(f"GlazeFoundation.kt missing V1.6 source-policy mapping: {required_text!r}")
+
+glaze_policy = (ROOT / "app/src/main/java/com/goreecloud/filemanager/ui/GlazeV16PresentationPolicy.kt").read_text(encoding="utf-8")
+for required_text in [
+    'stableVersion = "1.6.0"',
+    'stableSourceRevision = "a7180679ea851389e0f3004515f9a25f420e716d"',
+    'platformContractVersion = "0.4"',
+    'platformContractRevision = "e49b9afdea094c96a36a0457b1603f2fa8e8fa6b"',
+    'colorOnlyMeaningAllowed = false',
+    'mayInferPrivacyState = false',
+    'mayInferSecurityState = false',
+    'mayGrantAuthorization = false',
+]:
+    if required_text not in glaze_policy:
+        errors.append(f"GlazeV16PresentationPolicy.kt missing fail-closed V1.6 policy requirement: {required_text!r}")
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for required_text in [
-    "GLAZE UI V1.3 / 1.3.0",
+    "GLAZE UI V1.6 / 1.6.0",
     "Linux and Android",
     "Wardveil Security",
     "Privacy Shield",
@@ -162,12 +190,17 @@ for required_text in ['#0D9488', '#4F46E5', 'android:viewportWidth="64"', 'andro
         errors.append(f"Android File Manager icon derivative drifted: {required_text!r}")
 
 architecture = (ROOT / "ARCHITECTURE.md").read_text(encoding="utf-8")
-for required_text in ["Sync versus backup", "User-authorized Android document-tree provider", "recursive folder deletion", "Linux client architecture", "Cross-platform resource identity", "LinuxFileRepository"]:
+for required_text in ["Sync versus backup", "User-authorized Android document-tree provider", "recursive folder deletion", "Linux client architecture", "Cross-platform resource identity", "LinuxFileRepository", "GLAZE UI V1.6 / 1.6.0"]:
     if required_text.lower() not in architecture.lower():
         errors.append(f"ARCHITECTURE.md missing required architecture invariant: {required_text!r}")
 
+user_manual = (ROOT / "USER-MANUAL.md").read_text(encoding="utf-8")
+for required_text in ["GLAZE UI V1.6 / 1.6.0", "does not establish Linux Stable acceptance"]:
+    if required_text not in user_manual:
+        errors.append(f"USER-MANUAL.md missing current acceptance boundary: {required_text!r}")
+
 specifications = (ROOT / "SPECIFICATIONS.md").read_text(encoding="utf-8")
-for required_text in ["Required native platforms", "Linux and Android", "Linux implementation status", "Cross-platform resource identity", "GLAZE UI V1.3 / 1.3.0", "Current Linux development storage baseline"]:
+for required_text in ["Required native platforms", "Linux and Android", "Linux implementation status", "Cross-platform resource identity", "GLAZE UI V1.6 / 1.6.0", "Current Linux development storage baseline"]:
     if required_text not in specifications:
         errors.append(f"SPECIFICATIONS.md missing required platform baseline: {required_text!r}")
 
@@ -185,6 +218,16 @@ transfer_service = (ROOT / "core/src/main/kotlin/com/goreecloud/filemanager/stor
 for required_text in ['MessageDigest.getInstance("SHA-256")', "if (!deleteSource)", "val delete = sourceProvider.delete(source)", "Both files were kept."]:
     if required_text not in transfer_service:
         errors.append(f"shared transfer service missing safety requirement: {required_text!r}")
+for required_text in [
+    "firstOrNull { it.resourceId == createdEntry.resourceId }",
+    "verifiedEntry.sizeBytes != null",
+    "destinationProvider.delete(createdEntry)",
+]:
+    if required_text not in transfer_service:
+        errors.append(f"shared transfer service missing exact-resource verification hardening: {required_text!r}")
+if "firstOrNull { it.displayName ==" in transfer_service:
+    errors.append("shared transfer service must not fall back to same-name destination verification")
+
 
 linux_provider = (ROOT / "linux-client/src/main/kotlin/com/goreecloud/filemanager/linux/LinuxFileRepository.kt").read_text(encoding="utf-8")
 for required_text in ["LinkOption.NOFOLLOW_LINKS", "FileItemType.SYMLINK", "Resource escapes the selected Linux root.", "Symbolic-link traversal is not enabled.", "Mutations across a mount boundary are not enabled.", "Recursive folder deletion is not enabled.", "sameFileStore"]:
@@ -240,7 +283,7 @@ for required_text in ["bounded Linux-provider development", "goreecloud.platform
         errors.append(f"CONFORMANCE.md missing current acceptance boundary: {required_text!r}")
 
 platform_contract = (ROOT / "goreecloud.platform.yaml").read_text(encoding="utf-8")
-for required_text in ['glaze_ui_required: "1.3.0"', 'glaze-ui==1.3.0', 'supported_platforms:\n  - android', 'Linux is a required first-class File Manager target']:
+for required_text in ['schema_version: "0.4"', 'repository: GoreeCloud/file-manager', 'glaze_ui_required: "1.6.0"', 'glaze-ui==1.6.0', 'platform_contract: "0.4"', '  policy:', '  observability:', 'supported_platforms:\n  - android', 'Linux is a required first-class File Manager target']:
     if required_text not in platform_contract:
         errors.append(f"goreecloud.platform.yaml missing current platform truth: {required_text!r}")
 

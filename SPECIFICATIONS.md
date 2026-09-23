@@ -3,7 +3,7 @@
 ## Project identity
 
 - **Project:** GoreeCloud File Manager
-- **Repository:** `GoreeCloud/goreecloud-file-manager`
+- **Repository:** `GoreeCloud/file-manager`
 - **Development model:** original GoreeCloud-owned native application
 - **Current lifecycle:** active Android development / shared-core foundation / bounded Linux provider and location-discovery development
 - **Stable eligibility:** false until required implementation and acceptance gates complete
@@ -199,7 +199,7 @@ Current shared code establishes separate typed state/evidence fields so one posi
 
 ### Glaze UI
 
-Current required Stable baseline: **GLAZE UI V1.3 / 1.3.0**. Application-specific source mapping, automated checks, rendered/native accessibility, responsive/form-factor acceptance, and representative-platform evidence are required before File Manager can claim current-Stable alignment. The Android UI implementation predates this target and therefore requires explicit migration and fresh consumer acceptance. The Linux development harness is not a Glaze UI desktop implementation.
+Current required Stable baseline: **GLAZE UI V1.6 / 1.6.0** at accepted release source `a7180679ea851389e0f3004515f9a25f420e716d`. Android now includes a bounded presentation-policy mapping that pins this authority and preserves fail-closed presentation boundaries; this is only source-level migration evidence, not whole-application conformance. Linux presentation remains a Development candidate with earlier Glaze semantics. Complete optical/component migration, automated checks, rendered/native accessibility, responsive/form-factor behavior, representative-platform performance, rollback, Human Visual Excellence, and release acceptance remain required before File Manager can claim current-Stable alignment.
 
 ### Wardveil Security
 
@@ -222,6 +222,14 @@ Identity owns authenticated actor/service identity, account boundaries, devices,
 ### GoreeCloud Mesh
 
 Mesh coordinates bounded file/service/device events and cross-application state without transferring the independent authority of Drive, Sync, Identity, Privacy Shield, Wardveil, or Everkeep.
+
+### GoreeCloud Policy
+
+Policy is applicable to destructive-operation rules, provider restrictions, privacy/security decisions, administrative controls, enforcement coordination, explanations, freshness, exceptions, and policy evidence. File Manager currently has no accepted runtime Policy integration.
+
+### GoreeCloud Observability
+
+Observability is applicable to privacy-safe health, diagnostics, file-operation and transfer performance, provider/dependency health, evidence provenance/freshness, collection gaps, monitoring, and alerting. File Manager currently has no accepted runtime Observability integration or representative target-environment acceptance.
 
 ## Android technical baseline
 
@@ -263,4 +271,4 @@ Repository documentation includes README, specifications, features, feature road
 
 Source/build acceptance requires the exact revision to pass repository validation and all applicable platform-specific validation for the source present in that revision.
 
-Even successful Android and Linux development workflows do not establish production acceptance, complete storage-provider acceptance, user-facing copy/move/Trash/recovery acceptance, recursive transfer acceptance, current GLAZE UI V1.3 consumer acceptance, Wardveil/Privacy Shield/Everkeep runtime acceptance, Identity/Mesh production integration, Linux desktop UI/location-navigation/mount-lifecycle/package acceptance, production signing/deployment, or Stable qualification.
+Even successful Android and Linux development workflows do not establish production acceptance, complete storage-provider acceptance, user-facing copy/move/Trash/recovery acceptance, recursive transfer acceptance, current GLAZE UI V1.6 consumer acceptance, Wardveil/Privacy Shield/Everkeep runtime acceptance, Identity/Mesh production integration, Linux desktop UI/location-navigation/mount-lifecycle/package acceptance, production signing/deployment, or Stable qualification.

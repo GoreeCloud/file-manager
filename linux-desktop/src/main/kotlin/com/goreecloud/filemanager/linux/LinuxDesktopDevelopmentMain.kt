@@ -236,7 +236,7 @@ private fun LocationSidebar(
                     Text("Refresh locations")
                 }
                 Text(
-                    "Linux Development · GLAZE UI V1.3 target · conformance pending",
+                    "Linux Development · GLAZE UI V1.6 migration required · conformance pending",
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
