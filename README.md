@@ -70,7 +70,7 @@ Every discovery result carries an explicit-selection requirement. Discovery does
 
 The current candidate adds a non-production Compose Desktop surface rather than relabeling the CLI harness as a desktop application. It presents discovered location candidates first. Highlighting a candidate remains metadata-only; the separate **Open location** action is required before `LinuxFileRepository` is constructed. The resulting desktop browsing session is read-only at the UI layer even when the provider reports mutation capabilities.
 
-The desktop composition follows the current GLAZE UI V1.3 direction at source/design level: content-first window composition, edge-integrated location navigation, responsive toolbar, solid file-content plane, contextual information, clear state/error messaging, and deliberate avoidance of a stretched mobile layout. This source implementation is **not** a Glaze conformance certificate. Rendered/native accessibility, keyboard/pointer, reduced-motion/transparency/contrast behavior, representative desktop review, and current consumer acceptance remain pending.
+The desktop composition follows an earlier GLAZE UI V1.3 direction at source/design level and remains migration-required against current Stable V1.6: content-first window composition, edge-integrated location navigation, responsive toolbar, solid file-content plane, contextual information, clear state/error messaging, and deliberate avoidance of a stretched mobile layout. This source implementation is **not** a Glaze conformance certificate. Rendered/native accessibility, keyboard/pointer, reduced-motion/transparency/contrast behavior, representative desktop review, and current consumer acceptance remain pending.
 
 Run the development surface from a Linux graphical session with:
 
@@ -115,12 +115,12 @@ Compose Multiplatform Desktop `1.12.0` is the current Linux **development presen
 
 ## Mandatory GoreeCloud platform gates
 
-- **Glaze UI:** current governed target is **GLAZE UI V1.3 / 1.3.0 Stable**. The Linux candidate now has a real desktop presentation source surface, but it remains development-only and has not completed rendered/native accessibility, adaptive/input, reduced-transparency/contrast/motion, or representative-platform acceptance. Android also still requires fresh current-revision migration/acceptance. Current-Stable conformance is not claimed.
+- **Glaze UI:** current governed Stable target is **GLAZE UI V1.6 / 1.6.0** at accepted release source `a7180679ea851389e0f3004515f9a25f420e716d`. Android now has a bounded source-policy mapping that pins this authority and corrects the stale future-version target, but that mapping is not rendered/native conformance. The Linux desktop candidate remains development-only and carries earlier presentation semantics. Complete Android and Linux optical/component migration plus rendered/native accessibility, adaptive/input, reduced-transparency/contrast/motion, representative-platform, performance, rollback, and release acceptance remain required. Current-Stable conformance is not claimed.
 - **Wardveil Security:** integration is required for authoritative security state and applicable file/content protection. No broad “Protected by Wardveil” claim is made by this repository.
 - **Privacy Shield:** integration is required for privacy authorization, minimization, exposure state, and privacy-aware file workflows. Runtime acceptance is not yet established here.
 - **Everkeep:** integration is required for evidence-backed backup, recoverability, continuity, preservation, and portability state. Backup existence must not be equated with verified recoverability.
 
-GoreeCloud Identity and GoreeCloud Mesh are also first-class platform authorities for identity/access and coordination respectively; their adapter boundaries are established, but runtime integration remains pending.
+GoreeCloud Identity and GoreeCloud Mesh are also first-class platform authorities for identity/access and coordination respectively; their adapter boundaries are established, but runtime integration remains pending. GoreeCloud Policy and GoreeCloud Observability are now explicitly evaluated under Platform Contract 0.4 and remain applicable-blocked pending runtime policy decision/enforcement evidence and privacy-safe health/diagnostic/operational evidence.
 
 ## Repository documents
 

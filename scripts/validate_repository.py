@@ -133,7 +133,7 @@ for required_text in [
 
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 for required_text in [
-    "GLAZE UI V1.3 / 1.3.0",
+    "GLAZE UI V1.6 / 1.6.0",
     "Linux and Android",
     "Wardveil Security",
     "Privacy Shield",
@@ -194,7 +194,7 @@ for required_text in ["Sync versus backup", "User-authorized Android document-tr
         errors.append(f"ARCHITECTURE.md missing required architecture invariant: {required_text!r}")
 
 specifications = (ROOT / "SPECIFICATIONS.md").read_text(encoding="utf-8")
-for required_text in ["Required native platforms", "Linux and Android", "Linux implementation status", "Cross-platform resource identity", "GLAZE UI V1.3 / 1.3.0", "Current Linux development storage baseline"]:
+for required_text in ["Required native platforms", "Linux and Android", "Linux implementation status", "Cross-platform resource identity", "GLAZE UI V1.6 / 1.6.0", "Current Linux development storage baseline"]:
     if required_text not in specifications:
         errors.append(f"SPECIFICATIONS.md missing required platform baseline: {required_text!r}")
 
