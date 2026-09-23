@@ -38,6 +38,7 @@ required_source = [
     "app/src/main/java/com/goreecloud/filemanager/ui/GlazeFoundation.kt",
     "app/src/main/java/com/goreecloud/filemanager/ui/GlazeV16PresentationPolicy.kt",
     "app/src/test/java/com/goreecloud/filemanager/ui/GlazeFoundationPolicyTest.kt",
+    "app/src/test/java/com/goreecloud/filemanager/ui/GlazeFileManagerContractTest.kt",
     "app/src/test/java/com/goreecloud/filemanager/storage/LocalFileRepositoryTest.kt",
     "core/src/main/kotlin/com/goreecloud/filemanager/model/FileModels.kt",
     "core/src/main/kotlin/com/goreecloud/filemanager/platform/PlatformAuthorities.kt",
@@ -212,6 +213,16 @@ transfer_service = (ROOT / "core/src/main/kotlin/com/goreecloud/filemanager/stor
 for required_text in ['MessageDigest.getInstance("SHA-256")', "if (!deleteSource)", "val delete = sourceProvider.delete(source)", "Both files were kept."]:
     if required_text not in transfer_service:
         errors.append(f"shared transfer service missing safety requirement: {required_text!r}")
+for required_text in [
+    "firstOrNull { it.resourceId == createdEntry.resourceId }",
+    "verifiedEntry.sizeBytes != null",
+    "destinationProvider.delete(createdEntry)",
+]:
+    if required_text not in transfer_service:
+        errors.append(f"shared transfer service missing exact-resource verification hardening: {required_text!r}")
+if "firstOrNull { it.displayName ==" in transfer_service:
+    errors.append("shared transfer service must not fall back to same-name destination verification")
+
 
 linux_provider = (ROOT / "linux-client/src/main/kotlin/com/goreecloud/filemanager/linux/LinuxFileRepository.kt").read_text(encoding="utf-8")
 for required_text in ["LinkOption.NOFOLLOW_LINKS", "FileItemType.SYMLINK", "Resource escapes the selected Linux root.", "Symbolic-link traversal is not enabled.", "Mutations across a mount boundary are not enabled.", "Recursive folder deletion is not enabled.", "sameFileStore"]:
