@@ -129,7 +129,7 @@ After a location opens, the current desktop surface can:
 
 The desktop UI intentionally exposes **read-only browsing only** in this milestone. Existing provider create, rename, write, copy/move, and delete primitives are not presented as desktop actions yet.
 
-The current source composition uses a desktop-specific edge location sidebar, toolbar, solid file-content plane, contextual inspector, and clear status/error presentation. It targets **GLAZE UI V1.3 / 1.3.0**, but source compilation does not establish rendered/native Glaze conformance. Representative desktop rendering, keyboard/pointer behavior, focus, assistive-technology behavior, reduced transparency/contrast/motion, scaling, accessibility, safe-eject behavior, supported package formats, signing, and release acceptance remain separate work.
+The current source composition uses a desktop-specific edge location sidebar, toolbar, solid file-content plane, contextual inspector, and clear status/error presentation. It predates current Stable **GLAZE UI V1.6 / 1.6.0** and remains migration-required; source compilation does not establish rendered/native Glaze conformance. Representative desktop rendering, keyboard/pointer behavior, focus, assistive-technology behavior, reduced transparency/contrast/motion, scaling, accessibility, safe-eject behavior, supported package formats, signing, and release acceptance remain separate work.
 
 This development surface **does not establish Linux Stable acceptance** and does not add Linux to `goreecloud.platform.yaml` `supported_platforms`.
 
@@ -170,7 +170,7 @@ The current Android development build does not yet provide complete copy/move/du
 
 The Linux development source now provides a native graphical **development** surface for explicit location selection and read-only browsing, but not an accepted production desktop client. It still lacks accepted mutation UX, mount/removable-media lifecycle and safe-eject workflows, ownership/permission UX, file associations/Open With, drag-and-drop/clipboard integration, complete keyboard/pointer/accessibility acceptance, windows/tabs/dual-pane UI, network providers, accepted package formats, production signing/distribution, representative desktop/distribution acceptance, or production/Stable runtime status.
 
-**GLAZE UI V1.3 / 1.3.0** is the current governed design-system target, but platform-specific visual, accessibility, input, responsiveness, performance, and current-Stable conformance acceptance remain required. Linux desktop source compilation is not Glaze conformance evidence.
+**GLAZE UI V1.6 / 1.6.0** is the current governed design-system target. Android has a bounded source-policy mapping only, while Linux remains migration-required. Platform-specific visual, accessibility, input, responsiveness, performance, rollback, Human Visual Excellence, and current-Stable conformance acceptance remain required. Linux desktop source compilation is not Glaze conformance evidence.
 
 ## Reporting development problems
 

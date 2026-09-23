@@ -190,9 +190,14 @@ for required_text in ['#0D9488', '#4F46E5', 'android:viewportWidth="64"', 'andro
         errors.append(f"Android File Manager icon derivative drifted: {required_text!r}")
 
 architecture = (ROOT / "ARCHITECTURE.md").read_text(encoding="utf-8")
-for required_text in ["Sync versus backup", "User-authorized Android document-tree provider", "recursive folder deletion", "Linux client architecture", "Cross-platform resource identity", "LinuxFileRepository"]:
+for required_text in ["Sync versus backup", "User-authorized Android document-tree provider", "recursive folder deletion", "Linux client architecture", "Cross-platform resource identity", "LinuxFileRepository", "GLAZE UI V1.6 / 1.6.0"]:
     if required_text.lower() not in architecture.lower():
         errors.append(f"ARCHITECTURE.md missing required architecture invariant: {required_text!r}")
+
+user_manual = (ROOT / "USER-MANUAL.md").read_text(encoding="utf-8")
+for required_text in ["GLAZE UI V1.6 / 1.6.0", "does not establish Linux Stable acceptance"]:
+    if required_text not in user_manual:
+        errors.append(f"USER-MANUAL.md missing current acceptance boundary: {required_text!r}")
 
 specifications = (ROOT / "SPECIFICATIONS.md").read_text(encoding="utf-8")
 for required_text in ["Required native platforms", "Linux and Android", "Linux implementation status", "Cross-platform resource identity", "GLAZE UI V1.6 / 1.6.0", "Current Linux development storage baseline"]:

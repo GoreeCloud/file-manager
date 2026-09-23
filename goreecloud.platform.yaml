@@ -1,4 +1,5 @@
 schema_version: "0.4"
+# Current exact source authority: Platform Contract 0.4 / nine systems; Glaze V1.6 remains application-acceptance gated.
 
 component:
   type: application

@@ -266,7 +266,7 @@ Mesh coordinates bounded events/state between systems. Successful Mesh delivery 
 
 ### Glaze UI
 
-GLAZE UI V1.3 / 1.3.0 is the current governed Stable consumer target. Glaze UI governs application presentation, interaction, accessibility, responsiveness, and design-system semantics. It may visualize evidence but cannot create platform truth. Each supported File Manager platform requires its own current-revision conformance evidence.
+GLAZE UI V1.6 / 1.6.0 is the current governed Stable consumer target at accepted source `a7180679ea851389e0f3004515f9a25f420e716d`. Glaze UI governs application presentation, interaction, accessibility, responsiveness, and design-system semantics. It may visualize evidence but cannot create platform truth. Android now carries a bounded V1.6 source-policy mapping; Linux retains earlier Development presentation semantics. Each supported File Manager platform still requires its own rendered/native current-revision conformance evidence.
 
 The Linux command-line development harness is not a Glaze UI implementation and must not be counted as desktop UI conformance evidence.
 
@@ -304,7 +304,7 @@ The current Android shell uses Jetpack Compose/Material 3 with a repository-loca
 
 The Linux development harness currently has no production UI layer. Its `--locations` report is engineering evidence, not the desktop Home/location surface. The future desktop client must provide desktop-native Home/XDG/mount presentation and explicit location selection, keyboard/pointer interaction, focus behavior, context menus, windows/tabs, drag-and-drop, larger-display density, Open With/file-association integration, and split/dual-pane workflows while retaining Glaze semantics and accessibility requirements.
 
-Both native user-facing clients require fresh migration to the current governed GLAZE UI V1.3 / 1.3.0 target and independent rendered/native acceptance. Visual similarity does not establish conformance.
+Both native user-facing clients require completion of the current governed GLAZE UI V1.6 / 1.6.0 migration and independent rendered/native acceptance. Android's bounded source mapping is not whole-application acceptance; Linux still requires explicit V1.6 migration. Visual similarity does not establish conformance.
 
 ## 16. Build, packaging, and acceptance split
 
