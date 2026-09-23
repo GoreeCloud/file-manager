@@ -12,8 +12,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 
 object GlazeUiFoundation {
-    const val currentStableTarget = "2.0.0"
-    val minimumTouchTarget = 48.dp
+    const val currentStableTarget = GlazeV16PresentationPolicy.stableVersion
+    const val currentStableSourceRevision = GlazeV16PresentationPolicy.stableSourceRevision
+    val minimumTouchTarget = GlazeV16PresentationPolicy.minimumTouchTargetDp(touchAssistance = false).dp
+    val touchAssistanceTarget = GlazeV16PresentationPolicy.minimumTouchTargetDp(touchAssistance = true).dp
 }
 
 @Composable

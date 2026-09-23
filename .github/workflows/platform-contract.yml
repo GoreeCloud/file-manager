@@ -1,5 +1,7 @@
 name: Platform Contract
 
+# Contract 0.4 validates the authoritative nine-system model and current Stable Glaze UI 1.6.0 requirement. This is exact-source declaration/conformance evidence only; it does not manufacture runtime acceptance or Stable status.
+
 on:
   pull_request:
     paths:
@@ -22,6 +24,6 @@ concurrency:
 
 jobs:
   validate:
-    uses: GoreeCloud/GoreeCloud/.github/workflows/reusable-platform-manifest.yml@235e519fe342d7e7075c8239fbf0f3a19dc4c6c8
+    uses: GoreeCloud/GoreeCloud/.github/workflows/reusable-platform-manifest.yml@e49b9afdea094c96a36a0457b1603f2fa8e8fa6b
     with:
       manifest-path: goreecloud.platform.yaml

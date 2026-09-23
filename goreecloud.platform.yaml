@@ -1,10 +1,10 @@
-schema_version: "0.2"
+schema_version: "0.4"
 
 component:
   type: application
   id: goreecloud-file-manager
   product_name: GoreeCloud File Manager
-  repository: GoreeCloud/goreecloud-file-manager
+  repository: GoreeCloud/file-manager
 
 lifecycle: development
 version: "0.1.0-dev"
@@ -24,7 +24,7 @@ platform_systems:
     version: null
     evidence:
       - README.md
-      - app/src/main/java/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
+      - core/src/main/kotlin/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
     notes: File Manager has explicit platform-authority adapter boundaries, but accepted GoreeCloud Manager registration, administrative visibility, lifecycle control, and runtime acceptance are not established.
   privacy_shield:
     result: applicable-blocked
@@ -33,7 +33,7 @@ platform_systems:
       - README.md
       - ARCHITECTURE.md
       - CONFORMANCE.md
-      - app/src/main/java/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
+      - core/src/main/kotlin/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
       - app/src/main/java/com/goreecloud/filemanager/storage/SafTreeFileRepository.kt
     notes: Current Android storage access is user-authorized through the Storage Access Framework and avoids unrestricted filesystem permission, and missing privacy evidence remains explicit rather than reassuring. Accepted Privacy Shield policy, privacy-state producer integration, minimization/retention authority, and runtime acceptance are not established. The Linux Development filesystem/provider surface likewise does not substitute for Privacy Shield authority.
   wardveil_security:
@@ -43,8 +43,8 @@ platform_systems:
       - README.md
       - ARCHITECTURE.md
       - CONFORMANCE.md
-      - app/src/main/java/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
-      - app/src/main/java/com/goreecloud/filemanager/storage/FileTransferService.kt
+      - core/src/main/kotlin/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
+      - core/src/main/kotlin/com/goreecloud/filemanager/storage/FileTransferService.kt
     notes: File Manager separates security evidence from ordinary file state and cross-provider transfer integrity uses SHA-256 verification, but authoritative Wardveil Security producer integration, applicable content scanning/protection, destructive-operation security policy, and runtime acceptance are not established.
   everkeep:
     result: applicable-blocked
@@ -53,26 +53,27 @@ platform_systems:
       - README.md
       - ARCHITECTURE.md
       - CONFORMANCE.md
-      - app/src/main/java/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
+      - core/src/main/kotlin/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
     notes: The domain model keeps synchronization, backup/recoverability, and continuity distinct and recursive folder deletion remains refused while recovery safeguards are incomplete. Accepted Everkeep backup/recovery evidence, Trash/recovery integration, clean-target restore, continuity, and portability acceptance are not established.
   glaze_ui:
     result: applicable-migration-required
-    version: null
+    version: "1.6.0"
     evidence:
       - README.md
       - ARCHITECTURE.md
       - CONFORMANCE.md
       - app/src/main/java/com/goreecloud/filemanager/ui/GlazeFoundation.kt
+      - app/src/main/java/com/goreecloud/filemanager/ui/GlazeV16PresentationPolicy.kt
       - app/src/main/java/com/goreecloud/filemanager/ui/FileManagerApp.kt
       - linux-desktop/src/main/kotlin/com/goreecloud/filemanager/linux/LinuxDesktopDevelopmentMain.kt
-    notes: GLAZE UI V1.3 / 1.3.0 is the current governed Stable consumer target. The existing native Compose application has a repository-local Glaze mapping foundation that predates this target, and the Linux desktop surface is Development-only. File Manager must explicitly migrate and complete application-specific rendered, accessibility, resilience, adaptive/form-factor, representative-platform, and Human Visual Excellence acceptance independently for Android and Linux.
+    notes: Current Official Stable authority is GLAZE UI V1.6 / 1.6.0 at exact release source a7180679ea851389e0f3004515f9a25f420e716d. This Development candidate corrects the stale/future Android source target and adds a bounded V1.6 presentation-policy mapping, but existing Android and Linux presentation remains migration-required until complete optical/component migration plus rendered, accessibility, adaptive/form-factor, representative-platform, performance, rollback, Human Visual Excellence, release, and production acceptance are established independently for each platform.
   mesh:
     result: applicable-blocked
     version: null
     evidence:
       - README.md
       - ARCHITECTURE.md
-      - app/src/main/java/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
+      - core/src/main/kotlin/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
     notes: GoreeCloud Mesh coordination is represented only by an application adapter boundary. Canonical registration, capability publication, producer evidence, event contracts, and runtime acceptance are not established.
     capabilities: []
     dependencies: []
@@ -84,8 +85,25 @@ platform_systems:
     evidence:
       - README.md
       - ARCHITECTURE.md
-      - app/src/main/java/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
+      - core/src/main/kotlin/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
     notes: Provider-scoped file identity and Android URI authorization exist, but production GoreeCloud Identity account/session/device identity, ownership/access producer integration, and acceptance are not established. Linux platform Identity and access integration are also not yet implemented.
+
+  policy:
+    result: applicable-blocked
+    version: null
+    evidence:
+      - README.md
+      - CONFORMANCE.md
+      - goreecloud.platform.yaml
+    notes: GoreeCloud Policy is applicable to destructive-operation rules, provider capability restrictions, privacy/security decisions, administrative controls, and evidence handling, but accepted runtime Policy evaluation, distribution, explanation, freshness, enforcement coordination, exception handling, and production acceptance are not established.
+  observability:
+    result: applicable-blocked
+    version: null
+    evidence:
+      - README.md
+      - CONFORMANCE.md
+      - goreecloud.platform.yaml
+    notes: File Manager has source/build validation and user-visible operation outcomes, but accepted GoreeCloud Observability health, diagnostics, transfer/performance signals, provider/dependency health, provenance/freshness, privacy-safe telemetry, target-environment monitoring, alerting, and representative-runtime acceptance are not established.
 
 health:
   health_endpoint: null
@@ -124,11 +142,11 @@ external_dependencies:
     version_constraint: ">=26"
 
 compatibility:
-  platform_contract: "0.2"
-  glaze_ui_required: "1.3.0"
+  platform_contract: "0.4"
+  glaze_ui_required: "1.6.0"
   requires:
-    - goreecloud-platform-contract==0.2
-    - glaze-ui==1.3.0
+    - goreecloud-platform-contract==0.4
+    - glaze-ui==1.6.0
     - android-api>=26
   provides: []
 
@@ -145,10 +163,10 @@ conformance:
     - CONFORMANCE.md
     - SPECIFICATIONS.md
     - app/src/main/AndroidManifest.xml
-    - app/src/main/java/com/goreecloud/filemanager/model/FileModels.kt
-    - app/src/main/java/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
-    - app/src/main/java/com/goreecloud/filemanager/storage/FileStorageProvider.kt
-    - app/src/main/java/com/goreecloud/filemanager/storage/FileTransferService.kt
+    - core/src/main/kotlin/com/goreecloud/filemanager/model/FileModels.kt
+    - core/src/main/kotlin/com/goreecloud/filemanager/platform/PlatformAuthorities.kt
+    - core/src/main/kotlin/com/goreecloud/filemanager/storage/FileStorageProvider.kt
+    - core/src/main/kotlin/com/goreecloud/filemanager/storage/FileTransferService.kt
     - app/src/main/java/com/goreecloud/filemanager/storage/LocalFileRepository.kt
     - app/src/main/java/com/goreecloud/filemanager/storage/SafTreeFileRepository.kt
     - app/src/main/java/com/goreecloud/filemanager/ui/FileManagerApp.kt
@@ -162,7 +180,10 @@ conformance:
     - Privacy Shield producer integration and accepted privacy authorization/minimization/retention behavior are not established.
     - Wardveil Security producer integration and accepted file-security/destructive-operation policy are not established; SHA-256 transfer verification is integrity evidence only.
     - Everkeep integration, unified Trash/recovery, backup/recoverability evidence, clean-target restore, rollback, and continuity acceptance are not established.
-    - File Manager requires explicit migration to governed GLAZE UI V1.3 / 1.3.0 plus complete application-specific Linux and Android acceptance evidence.
+    - File Manager now has a bounded GLAZE UI V1.6 / 1.6.0 source-policy mapping, but complete Android/Linux optical and component migration plus rendered, accessibility, representative-platform, performance, rollback, release, and production acceptance remain incomplete.
     - GoreeCloud Mesh registration, capabilities/events, producer evidence, and runtime acceptance are not established.
     - GoreeCloud Identity production account/session/device/ownership integration and acceptance are not established.
+    - GoreeCloud Policy runtime evaluation, enforcement coordination, explanation, freshness, exception handling, and evidence acceptance are not established.
+    - GoreeCloud Observability runtime health, diagnostics, performance, dependency-health, provenance/freshness, collection-gap, privacy-safe telemetry, and target-environment acceptance are not established.
+    - GoreeCloud Sync remains separately governed; provider registration, authenticated synchronization, reconciliation, deletion/conflict behavior, offline state, and cross-device acceptance are not established.
     - Complete user-facing copy/move/duplicate/file creation, multi-selection, unified Trash, removable/network/Drive providers, previews, sharing, search/indexing, production signing, representative-platform acceptance, release approval, Release Candidate entry, and Stable qualification remain outstanding.
