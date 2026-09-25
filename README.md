@@ -124,7 +124,8 @@ GoreeCloud Identity and GoreeCloud Mesh are also first-class platform authoritie
 
 ## Repository documents
 
-- [SPECIFICATIONS.md](SPECIFICATIONS.md) — application specification and current technical baseline
+- [PROJECT-SPECIFICATIONS.md](PROJECT-SPECIFICATIONS.md) — authoritative application specification, cross-platform provider model, platform boundaries, and acceptance requirements
+- [PROJECT-RECORD.md](PROJECT-RECORD.md) — significant architecture history, repository-rename provenance, candidate boundaries, and migration evidence
 - [FEATURES.md](FEATURES.md) — implemented and planned feature status
 - [FEATURE-ROADMAP.md](FEATURE-ROADMAP.md) — active feature obligations, priority, dependency/acceptance state, and Drive-roadmap synchronization control
 - [BENEFITS.md](BENEFITS.md) — intended user and platform benefits
@@ -133,7 +134,7 @@ GoreeCloud Identity and GoreeCloud Mesh are also first-class platform authoritie
 - [CONFORMANCE.md](CONFORMANCE.md) — current GoreeCloud platform-gate status
 - [USER-MANUAL.md](USER-MANUAL.md) — current Android behavior plus bounded Linux CLI/desktop development availability and acceptance boundaries
 
-The canonical project record and historical change log are maintained in Google Drive under `GoreeCloud/Projects` and `GoreeCloud/Changelogs`. The central feature roadmap is maintained under `GoreeCloud/Feature Roadmap/GoreeCloud File Manager`, and the central user manual is maintained under `GoreeCloud/User Manuals`.
+The canonical project specification and significant project record are repository-native in `PROJECT-SPECIFICATIONS.md` and `PROJECT-RECORD.md`. Google Drive is not a parallel authority for those records. The existing `FEATURE-ROADMAP.md` is temporary migration input pending the separately governed repository-native feature/changelog migration; historical Drive roadmap/changelog material must not be recreated as a synchronized authority.
 
 ## Android development baseline
 

@@ -1,9 +1,65 @@
-# GoreeCloud File Manager — Specifications
+# GoreeCloud File Manager — Project Specifications
+
+**Repository:** `GoreeCloud/file-manager`  
+**Former repository identity in the Drive source:** `GoreeCloud/goreecloud-file-manager`  
+**Project type:** First-party native cross-platform file manager  
+**Lifecycle:** Development  
+**Repository visibility:** Public  
+**Default branch:** `main`  
+**Migration baseline:** `acbabdcb86eb5a9a1cdb907be613c5d0954a7447`  
+**License:** AGPL-3.0-only  
+**Required native platforms:** Linux and Android  
+**Current accepted user-facing native client:** Android; Linux has accepted Development foundations but remains below supported-platform/Stable acceptance  
+**Production Android application ID:** `com.goreecloud.filemanager`  
+**Development Android application ID:** `com.goreecloud.filemanager.dev`  
+**Canonical authority:** This file is the authoritative project specification once accepted on the default branch.
+
+## Migration and precedence
+
+This file consolidates the former root `SPECIFICATIONS.md` with Google Drive **Project Specification — File Manager.docx** (file ID `1tfhaFl-OuuDUqn0jLLYtiBLiNmHZ44ix`).
+
+The Drive source and former repository specification use the earlier repository name `GoreeCloud/goreecloud-file-manager`; live GitHub and the canonical repository inventory identify the current repository as `GoreeCloud/file-manager`.
+
+Accepted `main` controls current implementation claims. Open Draft PR #20/#21 work remains candidate evidence only until accepted and merged.
+
+The Drive source includes historical exact-version Glaze/Platform Contract checkpoints. Exact version statements are evidence for their recorded revisions, not a permanent product pin. The governing requirement is to implement the latest accepted Stable Glaze UI and applicable platform contracts at the candidate being qualified. Draft PR #21's newer Glaze/Platform Contract work does not become authoritative merely because it exists.
+
+## Drive-source coverage
+
+The Drive project specification contains 33 numbered sections. Its target capability scope is represented in this canonical specification through the current repository specification, `FEATURES.md`, and the cross-platform/product requirements below. Its sections cover:
+
+- product role and original native application model;
+- core file management;
+- browsing/navigation/Home/workspaces;
+- search and natural-language discovery;
+- previews, tags, collections, and smart views;
+- advanced operations/Operations Center;
+- local, removable, network, cloud, synchronized, backup, and recovery storage/provider concepts;
+- GoreeCloud Drive, Sync, Backup, Everkeep, Identity, Privacy Shield, Wardveil Security, and Mesh boundaries;
+- provenance, versions, sharing, permissions, offline behavior, storage intelligence, archives, file intelligence, and device awareness;
+- accessibility, reliability, personalization, and cross-platform behavior;
+- native file-picker/save/status/details experiences;
+- GoreeCloud-native design principles;
+- Development checkpoints, restrictions, and Stable-promotion gates;
+- create/duplicate and verified-transfer checkpoints;
+- canonical visual identity;
+- Linux/Android first-class native platform requirements; and
+- merged Linux shared-core/provider/location/desktop Development history through September 2026.
+
+Historical milestone/PR/check evidence from those sections is preserved in `PROJECT-RECORD.md`; current lifecycle truth is determined from accepted repository state.
+
+## Version and authority interpretation
+
+Where the inherited body below describes a particular Glaze UI or Platform Contract version as “current,” read that statement as the accepted implementation/migration baseline for that exact repository revision unless the surrounding requirement clearly states a future target.
+
+For release qualification, File Manager must reconcile to the then-current accepted GoreeCloud authorities and repeat product/platform-specific acceptance. No shared-system release status transfers automatically to File Manager.
+
+## Current canonical specification
 
 ## Project identity
 
 - **Project:** GoreeCloud File Manager
-- **Repository:** `GoreeCloud/goreecloud-file-manager`
+- **Repository:** `GoreeCloud/file-manager`
 - **Development model:** original GoreeCloud-owned native application
 - **Current lifecycle:** active Android development / shared-core foundation / bounded Linux provider and location-discovery development
 - **Stable eligibility:** false until required implementation and acceptance gates complete
@@ -257,10 +313,17 @@ Only completed workflow results for the exact candidate head count as that candi
 
 ## Required documentation
 
-Repository documentation includes README, specifications, features, feature roadmap, benefits, competitive objectives, architecture, conformance, and `USER-MANUAL.md`. The corresponding central feature roadmap must be maintained in `GoreeCloud/Feature Roadmap/GoreeCloud File Manager`, the current central user manual must be maintained in `GoreeCloud/User Manuals`, and material project state must remain reconciled with the canonical Google Drive project specification and changelog.
+Canonical project requirements and significant project history are repository-native in `PROJECT-SPECIFICATIONS.md` and `PROJECT-RECORD.md`.
+
+Repository-local product/architecture/supporting documentation may include README, features, benefits, competitive objectives, architecture, conformance, and `USER-MANUAL.md` as applicable.
+
+The legacy `FEATURE-ROADMAP.md` is migration input pending the separately governed feature-state/changelog migration. It must not recreate a Google Drive synchronization requirement or compete with the canonical project specification.
+
+Historical Google Drive project-specification/changelog/roadmap material may remain protected migration evidence until the corresponding repository migration is accepted and verified. It is not a parallel current authority.
 
 ## Acceptance boundary
 
 Source/build acceptance requires the exact revision to pass repository validation and all applicable platform-specific validation for the source present in that revision.
 
 Even successful Android and Linux development workflows do not establish production acceptance, complete storage-provider acceptance, user-facing copy/move/Trash/recovery acceptance, recursive transfer acceptance, current GLAZE UI V1.3 consumer acceptance, Wardveil/Privacy Shield/Everkeep runtime acceptance, Identity/Mesh production integration, Linux desktop UI/location-navigation/mount-lifecycle/package acceptance, production signing/deployment, or Stable qualification.
+
