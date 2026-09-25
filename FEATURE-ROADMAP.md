@@ -1,14 +1,15 @@
 # GoreeCloud File Manager — Feature Roadmap
 
-**Status:** Active roadmap control  
+**Status:** Legacy migration control — non-authoritative  
 **Required native platforms:** Linux and Android  
-**Authoritative project record:** `GoreeCloud/Projects/Project Specification — File Manager`  
-**Canonical repository:** `GoreeCloud/goreecloud-file-manager`  
-**Drive counterpart:** `GoreeCloud/Feature Roadmap/GoreeCloud File Manager/FEATURE-ROADMAP.docx`
+**Authoritative project specification:** [`PROJECT-SPECIFICATIONS.md`](PROJECT-SPECIFICATIONS.md)  
+**Authoritative project record:** [`PROJECT-RECORD.md`](PROJECT-RECORD.md)  
+**Canonical repository:** `GoreeCloud/file-manager`  
+**Former Drive counterpart:** historical migration source only; do not synchronize or recreate as authority
 
-This roadmap records active File Manager feature obligations and implementation status without replacing the authoritative project specification, repository implementation evidence, release gates, or GoreeCloud Tasks Management. A feature is not complete or Stable merely because it appears here.
+This legacy roadmap is retained temporarily as migration input for the separately governed repository-native feature/changelog migration. It does not replace `PROJECT-SPECIFICATIONS.md`, `PROJECT-RECORD.md`, accepted repository implementation evidence, release gates, or GoreeCloud Tasks Management. A feature is not complete or Stable merely because it appears here.
 
-The repository and Drive roadmap copies must remain materially synchronized. Status changes require authoritative implementation/validation evidence, and historical checkpoints must remain historically truthful.
+Do not synchronize this file with Google Drive. Status changes require authoritative repository implementation/validation evidence, and historical checkpoints must remain historically truthful. Remaining obligations must be migrated into the mandatory repository-native feature-state records before this legacy file is removed.
 
 Current Development checkpoint: Draft PR #18 (`fix/linux-location-refresh-boundary`) exact head `746fb02e7ce11e58e5513f933d9eeaff1b8ac8e1` passed Linux Development `34539264117` and Android Foundation `34539264157`; it closes an already-open provider when refreshed discovery can no longer re-establish the same location identity. Stacked Draft PR #19 (`feature/linux-desktop-keyboard-navigation`) advances FR-014 with Alt+Left Back, F5 Refresh, Esc return-to-Locations, and an explicit `Open folder` accessibility action label/role while delegating only to existing read-only controller operations. PR #19 implementation head `c3b6db18bc351aa1cf4b3036cd93fbca054dc8ce` passed Linux Development `34544051630` and Android Foundation `34544051619`. Repository-roadmap head `b2aadf4785d938f80dac63c26d6a13f2903b1487` passed Linux Development `34544359163` and Android Foundation `34544359164`. A subsequent current-state correction at `531bc425b19bda4d8c238fdd01816a3f23fb5ea8` reconciled `goreecloud.platform.yaml` so it no longer falsely claims that no Linux application/provider/build surface exists while deliberately retaining Android-only `supported_platforms`; Platform Contract `34545152458`, Linux Development `34545151514`, and Android Foundation `34545151519` all passed on that exact head. Full focus-order, visible-focus, screen-reader, scaling/reduced-motion, representative keyboard/layout, pointer alternatives, Glaze UI rendered acceptance, packaging, platform-system acceptance, release, and Stable gates remain open.
 
@@ -24,9 +25,9 @@ Current Development checkpoint: Draft PR #18 (`fix/linux-location-refresh-bounda
 
 | ID | Feature / obligation | Priority | Current state |
 | --- | --- | --- | --- |
-| FR-001 | Reconcile every current planned or recommended File Manager feature against the authoritative project record and verified repository evidence. | High | Ongoing control |
+| FR-001 | Reconcile every retained File Manager obligation into the mandatory repository-native feature-state records using `PROJECT-SPECIFICATIONS.md` and verified repository evidence. | High | Pending separate feature-state migration |
 | FR-002 | Move actionable feature obligations into GoreeCloud Tasks Management when required, preserving priority, dependency, and lifecycle disposition. | High | Ongoing control |
-| FR-003 | Do not mark features implemented, complete, cancelled, or superseded without authoritative evidence and synchronized repository/Drive roadmap updates. | High | Ongoing control |
+| FR-003 | Do not mark features implemented, complete, cancelled, or superseded without authoritative repository evidence and reconciliation of the repository-native feature-state records. | High | Active evidence rule |
 | FR-010 | Maintain Linux and Android as first-class native product targets without transferring one platform's storage identity, permissions, or acceptance evidence to the other. | High | Active; Android remains the only declared supported platform, while Linux has validated Development foundations and an unmerged native desktop candidate below supported-platform acceptance |
 | FR-011 | Shared platform-neutral provider/resource/operation/evidence core with verified ordinary-file transfer semantics. | High | Validated development foundation on authoritative main `42c959099b606c42ded1dc649e59d96716beb233` |
 | FR-012 | Linux desktop location discovery for Home/XDG user directories plus mounted-filesystem and removable-media candidates, while keeping discovery separate from explicit provider authorization. | High | Validated discovery foundation on authoritative implementation merge `1b6f34828d66c6f2869dda3b95429664f520de41`; Draft PR #18 exact head `746fb02e7ce11e58e5513f933d9eeaff1b8ac8e1` passed Linux Development `34539264117` and Android Foundation `34539264157`. It closes an opened provider when the candidate disappears, mounted/removable identity changes, or rediscovery fails. Representative mount/remount/unplug and safe-eject acceptance remain open. |
