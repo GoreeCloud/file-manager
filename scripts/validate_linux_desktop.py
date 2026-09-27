@@ -9,7 +9,7 @@ required_files = [
     "linux-desktop/src/main/kotlin/com/goreecloud/filemanager/linux/LinuxDesktopDevelopmentMain.kt",
     "linux-client/src/main/kotlin/com/goreecloud/filemanager/linux/LinuxDesktopController.kt",
     "linux-client/src/test/kotlin/com/goreecloud/filemanager/linux/LinuxDesktopControllerTest.kt",
-    "FEATURE-ROADMAP.md",
+    "PLANNED-FEATURES.md",
     "README.md",
     "CONFORMANCE.md",
     "USER-MANUAL.md",
@@ -123,7 +123,7 @@ require_text(
     ],
 )
 require_text(
-    "FEATURE-ROADMAP.md",
+    "PLANNED-FEATURES.md",
     [
         "FR-013",
         "Native Linux desktop Glaze UI V1.3 surface",

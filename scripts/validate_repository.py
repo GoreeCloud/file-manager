@@ -10,7 +10,9 @@ required_root = [
     "README.md",
     "SPECIFICATIONS.md",
     "FEATURES.md",
-    "FEATURE-ROADMAP.md",
+    "IMPLEMENTED-FEATURES.md",
+    "PLANNED-FEATURES.md",
+    "CHANGELOGS.md",
     "BENEFITS.md",
     "COMPETITIVE-OBJECTIVES.md",
     "BRANDING.md",
@@ -128,16 +130,15 @@ for pattern in [r"\bis protected by wardveil\b", r"\bwardveil[- ]protected\b", r
         errors.append("README contains an unverified positive Wardveil protection claim")
         break
 
-roadmap = (ROOT / "FEATURE-ROADMAP.md").read_text(encoding="utf-8")
+roadmap = (ROOT / "PLANNED-FEATURES.md").read_text(encoding="utf-8")
 for required_text in [
-    "GoreeCloud/Feature Roadmap/GoreeCloud File Manager/FEATURE-ROADMAP.docx",
     "FR-012",
     "Linux desktop location discovery",
     "discovery separate from explicit provider authorization",
     "supported_platforms",
 ]:
     if required_text not in roadmap:
-        errors.append(f"FEATURE-ROADMAP.md missing roadmap/governance requirement: {required_text!r}")
+        errors.append(f"PLANNED-FEATURES.md missing roadmap/governance requirement: {required_text!r}")
 
 branding = (ROOT / "BRANDING.md").read_text(encoding="utf-8")
 for required_text in [
