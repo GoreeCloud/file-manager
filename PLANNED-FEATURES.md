@@ -6,7 +6,6 @@
 **Required native platforms:** Linux and Android  
 **Authoritative project record:** `GoreeCloud/Projects/Project Specification — File Manager`  
 **Canonical repository:** `GoreeCloud/goreecloud-file-manager`  
-**Drive counterpart:** `GoreeCloud/Feature Roadmap/GoreeCloud File Manager/FEATURE-ROADMAP.docx`
 
 This roadmap records active File Manager feature obligations and implementation status without replacing the authoritative project specification, repository implementation evidence, release gates, or GoreeCloud Tasks Management. A feature is not complete or Stable merely because it appears here.
 
