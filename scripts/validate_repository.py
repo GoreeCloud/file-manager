@@ -8,7 +8,6 @@ PLATFORM_CONTRACT_REVISION = "235e519fe342d7e7075c8239fbf0f3a19dc4c6c8"
 
 required_root = [
     "README.md",
-    "SPECIFICATIONS.md",
     "FEATURES.md",
     "IMPLEMENTED-FEATURES.md",
     "PLANNED-FEATURES.md",
@@ -167,10 +166,10 @@ for required_text in ["Sync versus backup", "User-authorized Android document-tr
     if required_text.lower() not in architecture.lower():
         errors.append(f"ARCHITECTURE.md missing required architecture invariant: {required_text!r}")
 
-specifications = (ROOT / "SPECIFICATIONS.md").read_text(encoding="utf-8")
+specifications = (ROOT / "docs/PROJECT-SPECIFICATIONS.md").read_text(encoding="utf-8")
 for required_text in ["Required native platforms", "Linux and Android", "Linux implementation status", "Cross-platform resource identity", "GLAZE UI V1.3 / 1.3.0", "Current Linux development storage baseline"]:
     if required_text not in specifications:
-        errors.append(f"SPECIFICATIONS.md missing required platform baseline: {required_text!r}")
+        errors.append(f"docs/PROJECT-SPECIFICATIONS.md missing required platform baseline: {required_text!r}")
 
 models = (ROOT / "core/src/main/kotlin/com/goreecloud/filemanager/model/FileModels.kt").read_text(encoding="utf-8")
 for token in ["SyncState", "BackupState", "PrivacyState", "SecurityState", "EvidenceState", "FileCapability", "FileOperationOutcome", "StorageProviderDescriptor", "SYMLINK"]:
