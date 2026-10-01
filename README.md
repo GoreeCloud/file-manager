@@ -42,7 +42,7 @@ The repository currently provides:
 - a Linux desktop controller that structurally separates discovery/highlighting from provider construction: only the explicit **Open location** action may create the bounded provider, and returning to Locations closes that provider boundary;
 - unit tests proving the desktop discovery/highlight path is non-authorizing, explicit open constructs the provider, navigation stays provider-scoped, failed open leaves no provider authorized, and returning to Locations clears the active provider;
 - repository validation plus independent Android and Linux development workflow definitions; exact-head workflow results remain the acceptance evidence for each candidate revision;
-- a repository `FEATURE-ROADMAP.md` synchronized with the central GoreeCloud File Manager feature-roadmap control;
+- repository-native `IMPLEMENTED-FEATURES.md`, `PLANNED-FEATURES.md`, and `CHANGELOGS.md` feature-state records;
 - a repository `USER-MANUAL.md` synchronized with the central GoreeCloud User Manual requirement.
 
 The current storage slice remains intentionally bounded. The Android backend has regular-file copy/move primitives, but the Android UI does not yet expose destination-selection copy/move workflows. The Linux desktop candidate exposes location selection and read-only folder browsing only; existing Linux mutation primitives are deliberately not surfaced there. Duplicate, user-facing file creation on Android, multi-selection, unified Trash/recovery, recursive folder transfer, removable-storage lifecycle/safe-eject controls, network-provider workflows, GoreeCloud Drive, cross-device state, search/indexing, previews, sharing, and accepted platform-service runtime integrations remain implementation work.
@@ -124,16 +124,19 @@ GoreeCloud Identity and GoreeCloud Mesh are also first-class platform authoritie
 
 ## Repository documents
 
-- [SPECIFICATIONS.md](SPECIFICATIONS.md) — application specification and current technical baseline
+- [Project specifications](docs/PROJECT-SPECIFICATIONS.md) — canonical application requirements and current technical baseline
 - [FEATURES.md](FEATURES.md) — implemented and planned feature status
-- [FEATURE-ROADMAP.md](FEATURE-ROADMAP.md) — active feature obligations, priority, dependency/acceptance state, and Drive-roadmap synchronization control
+- [IMPLEMENTED-FEATURES.md](IMPLEMENTED-FEATURES.md) — accepted repository-native feature state
+- [PLANNED-FEATURES.md](PLANNED-FEATURES.md) — planned and remaining feature work
+- [CHANGELOGS.md](CHANGELOGS.md) — repository-native feature/fix chronology
+- [Project record](docs/PROJECT-RECORD.md) — significant architecture, migration, and governance history
 - [BENEFITS.md](BENEFITS.md) — intended user and platform benefits
 - [COMPETITIVE-OBJECTIVES.md](COMPETITIVE-OBJECTIVES.md) — product-quality objectives, not parity claims
 - [ARCHITECTURE.md](ARCHITECTURE.md) — native architecture, provider model, platform split, and authority boundaries
 - [CONFORMANCE.md](CONFORMANCE.md) — current GoreeCloud platform-gate status
 - [USER-MANUAL.md](USER-MANUAL.md) — current Android behavior plus bounded Linux CLI/desktop development availability and acceptance boundaries
 
-The canonical project record and historical change log are maintained in Google Drive under `GoreeCloud/Projects` and `GoreeCloud/Changelogs`. The central feature roadmap is maintained under `GoreeCloud/Feature Roadmap/GoreeCloud File Manager`, and the central user manual is maintained under `GoreeCloud/User Manuals`.
+Canonical project requirements and significant project history are repository-native in `docs/PROJECT-SPECIFICATIONS.md` and `docs/PROJECT-RECORD.md`. Repository-native feature state is maintained in `IMPLEMENTED-FEATURES.md`, `PLANNED-FEATURES.md`, and `CHANGELOGS.md`. Historical Drive migration sources remain evidence only until their separate retirement gates complete.
 
 ## Android development baseline
 
