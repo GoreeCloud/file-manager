@@ -48,7 +48,10 @@ sandbox. The current desktop entry does not advertise external file handling.
 The Linux packaging workflow compiles the desktop, runs shared and Linux
 provider tests, validates manifest permissions, creates package candidates,
 checks package metadata and exercises installation on disposable CI runners.
-Debian is installed, smoke-launched in a virtual X11 display, then purged.
+The headless runner provisions standard XDG desktop-menu directories
+before installing the Debian package; the packaging test still exercises
+the real package post-install and pre-remove scripts. Debian is installed,
+smoke-launched in a virtual X11 display, then purged.
 Flatpak is installed, checked for sandbox read-only home access and absence
 of network access, smoke-launched under virtual X11, then uninstalled.
 A visible window does not prove full accessibility, upgrade/rollback support,

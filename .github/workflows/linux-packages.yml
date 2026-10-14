@@ -39,6 +39,12 @@ jobs:
           test "$(find linux-desktop/build/compose/binaries/main/deb -type f -name '*.deb' | wc -l)" = 1
           dpkg-deb --info linux-desktop/build/compose/binaries/main/deb/*.deb
           sha256sum linux-desktop/build/compose/binaries/main/deb/*.deb
+      - name: Prepare XDG desktop menu directories on headless CI runner
+        run: |
+          # Compose/jpackage generates a desktop shortcut; xdg-desktop-menu requires
+          # standard writable global directories even when the runner has no desktop.
+          sudo install -d -m 0755 /usr/share/applications /usr/share/desktop-directories
+          sudo install -d -m 0755 /etc/xdg/menus/applications-merged
       - name: Install, launch, and purge Debian test package on disposable runner
         shell: bash
         run: |
