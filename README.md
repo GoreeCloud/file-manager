@@ -80,6 +80,13 @@ gradle :linux-desktop:runDevelopment
 
 This command is a developer workflow, not a supported Linux installation or release procedure.
 
+### Linux development package candidates
+
+Opt-in Debian and Flatpak package builds are documented in
+[Linux packaging](docs/LINUX-PACKAGING.md). These generated test artifacts are
+not Linux Stable, Glaze conformance, runtime acceptance, or public releases.
+
+
 ### Command-line development harness
 
 The current Linux harness remains intentionally read-only at its user-facing command surface. Explicit-root mode lists one selected provider root. `--locations` prints read-only discovery candidates without granting provider authorization. It remains useful for headless provider/discovery/build validation independently of the graphical development surface.

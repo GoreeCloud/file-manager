@@ -1,0 +1,103 @@
+name: Linux development packages
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deb-development:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Check exact revision and packaging permissions
+        run: |
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          python3 scripts/validate_repository.py
+          python3 scripts/validate_linux_desktop.py
+          python3 scripts/validate_linux_packaging.py
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.5.0'
+      - name: Install Debian packaging tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fakeroot dpkg-dev xvfb xauth xdotool
+      - name: Test and package development desktop
+        run: |
+          gradle :core:test :linux-client:test :linux-desktop:classes :linux-desktop:packageDeb
+          test "$(find linux-desktop/build/compose/binaries/main/deb -type f -name '*.deb' | wc -l)" = 1
+          dpkg-deb --info linux-desktop/build/compose/binaries/main/deb/*.deb
+          sha256sum linux-desktop/build/compose/binaries/main/deb/*.deb
+      - name: Prepare XDG desktop menu directories on headless CI runner
+        run: |
+          # Compose/jpackage generates a desktop shortcut; xdg-desktop-menu requires
+          # standard writable global directories even when the runner has no desktop.
+          sudo install -d -m 0755 /usr/share/applications /usr/share/desktop-directories
+          sudo install -d -m 0755 /etc/xdg/menus/applications-merged
+      - name: Install, launch, and purge Debian test package on disposable runner
+        shell: bash
+        run: |
+          bash -n scripts/smoke_linux_window.sh scripts/smoke_linux_deb.sh
+          DEB="$(find linux-desktop/build/compose/binaries/main/deb -maxdepth 1 -name '*.deb' -print -quit)"
+          test -n "$DEB"
+          bash scripts/smoke_linux_deb.sh "$DEB"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: goreecloud-file-manager-deb-development-${{ github.event.pull_request.head.sha || github.sha }}
+          path: linux-desktop/build/compose/binaries/main/deb/*.deb
+          if-no-files-found: error
+          retention-days: 14
+
+  flatpak-development:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Check exact revision and packaging permissions
+        run: |
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          python3 scripts/validate_linux_packaging.py
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.5.0'
+      - name: Prepare Flatpak SDK
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y flatpak flatpak-builder xvfb xauth xdotool
+          flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          flatpak install --user --noninteractive -y flathub org.freedesktop.Platform//26.08 org.freedesktop.Sdk//26.08
+      - name: Assemble and export development Flatpak
+        run: |
+          gradle :core:test :linux-client:test :linux-desktop:createDistributable
+          mkdir -p build
+          flatpak-builder --user --force-clean --repo=build/flatpak-repo build/flatpak-work packaging/flatpak/com.goreecloud.FileManager.Development.json
+          flatpak build-bundle build/flatpak-repo build/goreecloud-file-manager-development.flatpak com.goreecloud.FileManager.Development development
+          test -s build/goreecloud-file-manager-development.flatpak
+          sha256sum build/goreecloud-file-manager-development.flatpak
+      - name: Install, inspect sandbox, launch, and uninstall Flatpak on disposable runner
+        shell: bash
+        run: |
+          bash -n scripts/smoke_linux_window.sh scripts/smoke_linux_flatpak.sh
+          bash scripts/smoke_linux_flatpak.sh build/goreecloud-file-manager-development.flatpak
+      - uses: actions/upload-artifact@v4
+        with:
+          name: goreecloud-file-manager-flatpak-development-${{ github.event.pull_request.head.sha || github.sha }}
+          path: build/goreecloud-file-manager-development.flatpak
+          if-no-files-found: error
+          retention-days: 14

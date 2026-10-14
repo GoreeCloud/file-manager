@@ -1,3 +1,5 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+
 plugins {
     id("org.jetbrains.kotlin.jvm")
     id("org.jetbrains.kotlin.plugin.compose")
@@ -20,4 +22,22 @@ tasks.register<JavaExec>("runDevelopment") {
     description = "Runs the non-production GoreeCloud File Manager Linux desktop development surface."
     classpath = sourceSets["main"].runtimeClasspath
     mainClass.set("com.goreecloud.filemanager.linux.LinuxDesktopDevelopmentMainKt")
+}
+
+// Installable development artifacts. These are not Stable or production releases.
+compose.desktop {
+    application {
+        mainClass = "com.goreecloud.filemanager.linux.LinuxDesktopDevelopmentMainKt"
+        nativeDistributions {
+            targetFormats(TargetFormat.Deb)
+            packageName = "goreecloud-file-manager-dev"
+            packageVersion = "0.1.0"
+            description = "Development-only GoreeCloud File Manager Linux desktop browser"
+            vendor = "GoreeCloud"
+            linux {
+                shortcut = true
+                appCategory = "Utility"
+            }
+        }
+    }
 }

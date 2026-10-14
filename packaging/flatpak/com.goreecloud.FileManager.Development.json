@@ -1,0 +1,47 @@
+{
+  "app-id": "com.goreecloud.FileManager.Development",
+  "branch": "development",
+  "runtime": "org.freedesktop.Platform",
+  "runtime-version": "26.08",
+  "sdk": "org.freedesktop.Sdk",
+  "command": "goreecloud-file-manager-development",
+  "finish-args": [
+    "--share=ipc",
+    "--socket=wayland",
+    "--socket=fallback-x11",
+    "--device=dri",
+    "--filesystem=home:ro"
+  ],
+  "modules": [
+    {
+      "name": "file-manager-development",
+      "buildsystem": "simple",
+      "build-commands": [
+        "test -x goreecloud-file-manager-dev/bin/goreecloud-file-manager-dev",
+        "install -d /app/opt/goreecloud-file-manager",
+        "cp -a goreecloud-file-manager-dev/. /app/opt/goreecloud-file-manager/",
+        "install -Dm755 goreecloud-file-manager-development /app/bin/goreecloud-file-manager-development",
+        "install -Dm644 com.goreecloud.FileManager.Development.desktop /app/share/applications/com.goreecloud.FileManager.Development.desktop",
+        "install -Dm644 com.goreecloud.FileManager.Development.svg /app/share/icons/hicolor/scalable/apps/com.goreecloud.FileManager.Development.svg"
+      ],
+      "sources": [
+        {
+          "type": "dir",
+          "path": "../../linux-desktop/build/compose/binaries/main/app"
+        },
+        {
+          "type": "file",
+          "path": "goreecloud-file-manager-development"
+        },
+        {
+          "type": "file",
+          "path": "com.goreecloud.FileManager.Development.desktop"
+        },
+        {
+          "type": "file",
+          "path": "com.goreecloud.FileManager.Development.svg"
+        }
+      ]
+    }
+  ]
+}
