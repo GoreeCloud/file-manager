@@ -25,7 +25,7 @@ testing before promoting any Linux build.
 
 The Flatpak bundles the **prebuilt Compose Desktop app image**, including its
 packaged Java runtime. Flatpak does not download or compile application source
-inside its sandbox. Install the freedesktop Platform and SDK version 24.08 from
+inside its sandbox. Install the freedesktop Platform and SDK version 26.08 from
 your trusted Flatpak remote before building.
 
 ~~~sh
