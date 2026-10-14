@@ -16,7 +16,7 @@ gradle :linux-desktop:packageDeb
 dpkg-deb --info linux-desktop/build/compose/binaries/main/deb/*.deb
 ~~~
 
-The resulting package name is goreecloud-file-manager-dev, version 0.1.0.
+The resulting package name is goreecloud-file-manager-dev, Debian version 0.1.0-1.
 Install only on an authorized test machine. Complete clean-install,
 upgrade, uninstall, graphical input, accessibility, and data-boundary
 testing before promoting any Linux build.
@@ -47,9 +47,13 @@ sandbox. The current desktop entry does not advertise external file handling.
 
 The Linux packaging workflow compiles the desktop, runs shared and Linux
 provider tests, validates manifest permissions, creates package candidates,
-checks package metadata, and uploads time-limited GitHub Actions artifacts
-with SHA-256 evidence. CI does not publish a Release, sign packages, or
-prove install-time runtime behavior. Keep any user-facing download clearly
+checks package metadata and exercises installation on disposable CI runners.
+Debian is installed, smoke-launched in a virtual X11 display, then purged.
+Flatpak is installed, checked for sandbox read-only home access and absence
+of network access, smoke-launched under virtual X11, then uninstalled.
+A visible window does not prove full accessibility, upgrade/rollback support,
+or representative desktop acceptance. Temporary GitHub Actions artifacts
+include SHA-256 evidence; CI neither signs nor publishes a Release. Keep any user-facing download clearly
 identified as a development candidate.
 
 The existing Gradle runDevelopment target remains available. Android

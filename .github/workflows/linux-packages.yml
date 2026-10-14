@@ -32,13 +32,20 @@ jobs:
       - name: Install Debian packaging tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y fakeroot dpkg-dev
+          sudo apt-get install -y fakeroot dpkg-dev xvfb xauth xdotool
       - name: Test and package development desktop
         run: |
           gradle :core:test :linux-client:test :linux-desktop:classes :linux-desktop:packageDeb
           test "$(find linux-desktop/build/compose/binaries/main/deb -type f -name '*.deb' | wc -l)" = 1
           dpkg-deb --info linux-desktop/build/compose/binaries/main/deb/*.deb
           sha256sum linux-desktop/build/compose/binaries/main/deb/*.deb
+      - name: Install, launch, and purge Debian test package on disposable runner
+        shell: bash
+        run: |
+          bash -n scripts/smoke_linux_window.sh scripts/smoke_linux_deb.sh
+          DEB="$(find linux-desktop/build/compose/binaries/main/deb -maxdepth 1 -name '*.deb' -print -quit)"
+          test -n "$DEB"
+          bash scripts/smoke_linux_deb.sh "$DEB"
       - uses: actions/upload-artifact@v4
         with:
           name: goreecloud-file-manager-deb-development-${{ github.event.pull_request.head.sha || github.sha }}
@@ -66,7 +73,7 @@ jobs:
       - name: Prepare Flatpak SDK
         run: |
           sudo apt-get update
-          sudo apt-get install -y flatpak flatpak-builder
+          sudo apt-get install -y flatpak flatpak-builder xvfb xauth xdotool
           flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
           flatpak install --user --noninteractive -y flathub org.freedesktop.Platform//24.08 org.freedesktop.Sdk//24.08
       - name: Assemble and export development Flatpak
@@ -77,6 +84,11 @@ jobs:
           flatpak build-bundle build/flatpak-repo build/goreecloud-file-manager-development.flatpak com.goreecloud.FileManager.Development development
           test -s build/goreecloud-file-manager-development.flatpak
           sha256sum build/goreecloud-file-manager-development.flatpak
+      - name: Install, inspect sandbox, launch, and uninstall Flatpak on disposable runner
+        shell: bash
+        run: |
+          bash -n scripts/smoke_linux_window.sh scripts/smoke_linux_flatpak.sh
+          bash scripts/smoke_linux_flatpak.sh build/goreecloud-file-manager-development.flatpak
       - uses: actions/upload-artifact@v4
         with:
           name: goreecloud-file-manager-flatpak-development-${{ github.event.pull_request.head.sha || github.sha }}
