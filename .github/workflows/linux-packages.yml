@@ -81,7 +81,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y flatpak flatpak-builder xvfb xauth xdotool
           flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-          flatpak install --user --noninteractive -y flathub org.freedesktop.Platform//24.08 org.freedesktop.Sdk//24.08
+          flatpak install --user --noninteractive -y flathub org.freedesktop.Platform//26.08 org.freedesktop.Sdk//26.08
       - name: Assemble and export development Flatpak
         run: |
           gradle :core:test :linux-client:test :linux-desktop:createDistributable
