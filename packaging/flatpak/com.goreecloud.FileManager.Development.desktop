@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=GoreeCloud File Manager (Development)
+Comment=Development-only read-only Linux file browser
+Exec=goreecloud-file-manager-development
+Icon=com.goreecloud.FileManager.Development
+Terminal=false
+Categories=Utility;FileTools;
