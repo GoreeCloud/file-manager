@@ -8,6 +8,7 @@ PKG = ROOT / "packaging" / "flatpak"
 manifest = json.loads((PKG / "com.goreecloud.FileManager.Development.json").read_text())
 assert manifest["app-id"] == "com.goreecloud.FileManager.Development"
 assert manifest["branch"] == "development"
+assert manifest["runtime-version"] == "26.08"
 assert manifest["command"] == "goreecloud-file-manager-development"
 permissions = set(manifest["finish-args"])
 assert "--filesystem=home:ro" in permissions
