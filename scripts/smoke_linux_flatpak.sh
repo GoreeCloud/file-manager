@@ -10,7 +10,7 @@ app="com.goreecloud.FileManager.Development"
 flatpak install --user --noninteractive -y "$bundle"
 cleanup() { flatpak uninstall --user --noninteractive -y "$app" >/dev/null || true; }
 trap cleanup EXIT
-[[ "$(flatpak info --user --show-branch "$app")" == development ]]
+[[ "$(flatpak info --user --show-ref "$app")" == "app/$app/x86_64/development" ]]
 permissions="$(flatpak info --user --show-permissions "$app")"
 printf '%s\n' "$permissions"
 grep -Fq 'filesystems=home:ro;' <<<"$permissions"
